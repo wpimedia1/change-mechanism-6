@@ -20,6 +20,32 @@ No install. No account. No API key. No server. One file.
 
 Every scan ends with a ready-to-use sales pitch written to the specific problem found. Missing DMARC is a different conversation than weak SPF — the tool knows the difference and gives you the right angle.
 
+## SSL report notes: what `!` means
+
+The **`!` beside the certificate-details line is an informational notice**, not an error or a vulnerability warning. For example:
+
+```text
+! Certificate details (expiry, chain, ciphers) require CLI: openssl s_client -connect example.com:443 -showcerts
+```
+
+A passing SSL check means the browser HTTPS probe succeeded; the report marks port 443 as reachable and the TLS handshake as completed. The scanner does not retrieve or deeply inspect the certificate's expiration date, intermediate certificate chain, or supported cipher suites. This notice identifies that scan limitation and does not change the SSL result from PASS.
+
+To inspect the connection manually, run this in a terminal with OpenSSL installed, replacing `example.com` with the scanned domain:
+
+```sh
+openssl s_client -connect example.com:443 -showcerts
+```
+
+For the domain `worldpostinc.com`, use:
+
+```sh
+openssl s_client -connect worldpostinc.com:443 -showcerts
+```
+
+OpenSSL shows the certificates sent by the server and the connection's negotiated TLS protocol and cipher. The `-showcerts` output is not a verified certificate chain, and one connection does not enumerate all supported ciphers. To display a certificate's validity dates explicitly, save its PEM block to `certificate.pem` and run `openssl x509 -in certificate.pem -noout -dates`; `notAfter` is the expiration date. See the [OpenSSL s_client documentation](https://docs.openssl.org/3.0/man1/openssl-s_client/).
+
+This meaning applies specifically to the certificate-details notice. Other `!` entries can flag configuration warnings; read their message and the card's status.
+
 ---
 
 ## Download

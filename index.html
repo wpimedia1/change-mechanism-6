@@ -609,8 +609,9 @@ async function chkSSL(domain){
       analysis:[
         {t:'ok',m:`Port 443 responds — HTTPS is active`},
         {t:'ok',m:`TLS handshake completed in ~${ttfb}ms`},
-        {t:'w',m:'Certificate details (expiry, chain, ciphers) require CLI: openssl s_client -connect '+domain+':443'}
-      ]
+        {t:'w',m:'Certificate details (expiry, chain, ciphers) require CLI: openssl s_client -connect '+domain+':443 -showcerts'}
+      ],
+      note:'The ! beside certificate details is informational, not an error or vulnerability warning. The HTTPS probe succeeded, but this scanner does not inspect certificate expiry, the intermediate chain, or supported ciphers. This notice does not change the PASS result. Run the command above in a terminal with OpenSSL to inspect the server-sent certificates and negotiated cipher; it does not enumerate every supported cipher or establish a verified chain.'
     };
   }catch(e){
     if(e.name==='AbortError'){
