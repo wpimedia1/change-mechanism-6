@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DMARC-able | Web Configuration</title>
+<title>DMARC, SPF &amp; DKIM Checker — DMARC-able</title>
+<meta name="description" content="Check public DMARC, SPF, DKIM and MX records with DMARC-able. Review email authentication signals and browser HTTPS reachability without an API key.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#07090d">
+<link rel="canonical" href="https://dmarc-able.app/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="DMARC-able"><meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://dmarc-able.app/">
+<meta property="og:title" content="DMARC, SPF &amp; DKIM Checker — DMARC-able"><meta property="og:description" content="Check public DMARC, SPF, DKIM and MX records with DMARC-able. Review email authentication signals and browser HTTPS reachability without an API key.">
+<meta property="og:image" content="https://dmarc-able.app/social-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="DMARC-able domain security checker">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="DMARC, SPF &amp; DKIM Checker — DMARC-able"><meta name="twitter:description" content="Check public DMARC, SPF, DKIM and MX records with DMARC-able. Review email authentication signals and browser HTTPS reachability without an API key."><meta name="twitter:image" content="https://dmarc-able.app/social-preview.png"><meta name="twitter:image:alt" content="DMARC-able domain security checker">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://dmarc-able.app/#website","url":"https://dmarc-able.app/","name":"DMARC-able","inLanguage":"en"},{"@type":"WebPage","@id":"https://dmarc-able.app/#webpage","url":"https://dmarc-able.app/","name":"DMARC, SPF & DKIM Checker — DMARC-able","description":"Check public DMARC, SPF, DKIM and MX records with DMARC-able. Review email authentication signals and browser HTTPS reachability without an API key.","isPartOf":{"@id":"https://dmarc-able.app/#website"},"inLanguage":"en"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -399,14 +410,30 @@ footer{
   font-family:var(--mono);font-size:.6rem;
   color:var(--txtd);letter-spacing:.15em;
 }
+
+.logo{text-decoration:none}.hero h1{font-size:clamp(2.7rem,7vw,6.3rem);line-height:1.04;letter-spacing:.035em}
+.intro{max-width:680px;margin:0 auto 1.8rem;line-height:1.65;color:var(--txt)}
+.hero .sub{color:#91a8b7;margin-bottom:1.2rem;line-height:1.6}
+#di{min-width:0}.tog{background:var(--s1);min-height:40px;color:#91a8b7}
+.scan-note{max-width:760px;margin:0 auto 1.5rem;padding:0 24px;font-size:.85rem;line-height:1.6;color:#91a8b7}
+.methodology{max-width:1040px;margin:3rem auto;padding:2rem;border-top:1px solid var(--borderh);line-height:1.75}
+.methodology h2{font-family:var(--disp);font-size:2.2rem;font-weight:400;color:var(--green);margin-bottom:.8rem}
+.methodology h3{font-size:1.1rem;color:var(--txtb);margin:1rem 0 .4rem}.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem;margin-bottom:1rem}
+.methodology a,footer a{color:var(--green);text-underline-offset:4px}footer{color:#91a8b7;line-height:1.8}
+footer nav{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:12px;font-size:.75rem}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+.skip{position:fixed;top:-100px;left:16px;z-index:10;background:var(--green);color:var(--bg);padding:12px}.skip:focus{top:12px}
+@media(max-width:600px){header{flex-wrap:wrap;gap:16px;padding:20px}.logo{font-size:1.8rem}.hpills{flex-wrap:wrap}.hero{padding:2.5rem 18px 1.5rem}.hero h1{font-size:clamp(2.3rem,10vw,3.8rem)}.hero .sub{font-size:.6rem;letter-spacing:.1em}.ipfx{padding:0 .6rem;font-size:.7rem}#di{padding:1rem .65rem;font-size:.9rem}#sb{padding:0 .8rem}.intro{font-size:.9rem}.methodology{padding:1.5rem}.method-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <div class="sl"></div>
+<a class="skip" href="#checker">Skip to domain checker</a>
 <div id="app">
 
 <header>
-  <div class="logo">RECON<small>// SMB DOMAIN SECURITY AUDITOR</small></div>
+  <a class="logo" href="/" aria-label="DMARC-able home">DMARC-able<small>// DOMAIN SECURITY CHECKER</small></a>
   <div class="hpills">
     <div class="pill on">● DNS-OVER-HTTPS</div>
     <div class="pill on">● ZERO DEPENDENCIES</div>
@@ -414,25 +441,29 @@ footer{
   </div>
 </header>
 
+<main id="checker">
 <div class="hero">
-  <h1>FIND THE<br><em>HOLE.</em><br>MAKE THE<br><em>CALL.</em></h1>
-  <p class="sub">// SPF · DMARC · DKIM · SSL · MX — INSTANT SECURITY POSTURE AUDIT //</p>
+  <h1>DMARC, SPF<br>&amp; <em>DKIM CHECKER</em></h1>
+  <p class="sub">// PUBLIC EMAIL RECORDS · HTTPS REACHABILITY · CLEARER NEXT STEPS //</p>
 
+  <p class="intro">Check your domain’s public email authentication records, explore common DKIM selectors, and test browser HTTPS reachability. Review the findings before planning changes.</p>
   <div class="izone">
-    <div class="ipfx">TARGET://</div>
-    <input id="di" type="text" placeholder="example.com" autocomplete="off" spellcheck="false"/>
-    <button id="sb" onclick="go()">SCAN</button>
+    <label class="ipfx" for="di">DOMAIN</label>
+    <input id="di" type="text" aria-describedby="scan-note" inputmode="url" autocapitalize="none" placeholder="example.com" autocomplete="off" spellcheck="false"/>
+    <button id="sb">SCAN</button>
   </div>
 
   <div class="toggles">
-    <div class="tog on" data-k="dmarc" onclick="tog(this)"><span class="d"></span>DMARC</div>
-    <div class="tog on" data-k="spf"   onclick="tog(this)"><span class="d"></span>SPF</div>
-    <div class="tog on" data-k="dkim"  onclick="tog(this)"><span class="d"></span>DKIM</div>
-    <div class="tog on" data-k="ssl"   onclick="tog(this)"><span class="d"></span>SSL / 443</div>
-    <div class="tog on" data-k="mx"    onclick="tog(this)"><span class="d"></span>MX RECORDS</div>
+    <button type="button" class="tog on" data-k="dmarc" aria-pressed="true"><span class="d"></span>DMARC</button>
+    <button type="button" class="tog on" data-k="spf" aria-pressed="true"><span class="d"></span>SPF</button>
+    <button type="button" class="tog on" data-k="dkim" aria-pressed="true"><span class="d"></span>DKIM</button>
+    <button type="button" class="tog on" data-k="ssl" aria-pressed="true"><span class="d"></span>SSL / 443</button>
+    <button type="button" class="tog on" data-k="mx" aria-pressed="true"><span class="d"></span>MX RECORDS</button>
   </div>
 </div>
 
+<p id="scan-note" class="scan-note">Scans start only when you press Scan or Enter. DNS queries go to Cloudflare; the HTTPS check contacts your domain. Results stay in this page.</p>
+<noscript><p class="scan-note">JavaScript is needed to run checks. Read the methodology below to learn what the tool checks.</p></noscript>
 <div id="rp">
   <div class="tbar">
     <div>
@@ -451,8 +482,18 @@ footer{
   <div class="log" id="log"></div>
 </div>
 
+<section class="methodology" id="methodology" aria-labelledby="method-title">
+<h2 id="method-title">What this domain checker examines</h2>
+<p>DMARC-able reads public DNS records through Cloudflare DNS-over-HTTPS. It does not send email, verify a mailbox, or change your DNS configuration.</p>
+<div class="method-grid"><section><h3>DMARC and SPF</h3><p>Review the published DMARC policy, reporting address and percentage, plus common SPF configuration signals. The checker does not evaluate message alignment or recursively resolve every SPF lookup.</p></section>
+<section><h3>DKIM and MX</h3><p>Look for DKIM keys at 15 common selectors and inspect mail exchanger records. An undiscovered selector does not prove that DKIM is absent; confirm selectors with your email provider.</p></section>
+<section><h3>HTTPS and the health score</h3><p>The optional HTTPS check is a browser connection probe. Browser restrictions can affect it; it does not inspect certificate expiry, chains or cipher suites. The score summarizes these checks and is not a security certification.</p></section>
+<section><h3>Using your results</h3><p>Confirm findings with your email provider before changing authentication policies. Report wording and suggested outreach are starting points for review, not proof that a domain is vulnerable or protected.</p></section></div>
+<p>Learn more: <a href="https://www.rfc-editor.org/rfc/rfc7489">DMARC</a>, <a href="https://www.rfc-editor.org/rfc/rfc7208">SPF</a>, and <a href="https://www.rfc-editor.org/rfc/rfc6376">DKIM</a>.</p>
+</section>
+</main>
 </div>
-<footer>RECON · RUNS LOCALLY · NO SERVER · NO API KEY · DNS-OVER-HTTPS VIA CLOUDFLARE</footer>
+<footer>DMARC-able · BROWSER-BASED CHECKS · NO API KEY<nav aria-label="Footer"><a href="/">Domain checker</a><a href="#methodology">Methodology</a><a href="https://github.com/wpimedia1/change-mechanism-6">Source code</a><a href="/.well-known/security.txt">Report a vulnerability</a></nav></footer>
 
 <script>
 const DOH = 'https://cloudflare-dns.com/dns-query';
@@ -463,6 +504,7 @@ function tog(el){
   const k = el.dataset.k;
   if(active.has(k)){active.delete(k);el.classList.remove('on')}
   else{active.add(k);el.classList.add('on')}
+  el.setAttribute('aria-pressed', String(active.has(k)));
 }
 
 async function doh(name, type){
@@ -760,7 +802,7 @@ function buildSalesPitch(results){
       <div class="opener">${esc(pitch.opener)}</div>
       <div class="body">${pitch.body}</div>
       <div class="stips">${tipsHtml}</div>
-      <div class="cta" onclick="alert('Customize this CTA with your booking link or phone number.')">${esc(pitch.cta)}</div>
+      <button type="button" class="cta" data-pitch-cta>${esc(pitch.cta)}</button>
     </div>
   </div>`;
 }
@@ -770,6 +812,9 @@ async function go(){
   const raw=document.getElementById('di').value.trim();
   const domain=raw.replace(/^https?:\/\//,'').replace(/\/.*$/,'').toLowerCase();
   if(!domain)return;
+  const input=document.getElementById('di');
+  if(domain.length>253 || !/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/.test(domain)){input.setCustomValidity('Enter a public domain name, such as example.com.');input.reportValidity();return;}
+  input.setCustomValidity('');
 
   const btn=document.getElementById('sb');
   btn.disabled=true;btn.textContent='SCANNING…';
@@ -838,6 +883,10 @@ async function go(){
   btn.disabled=false;btn.textContent='SCAN';
 }
 
+document.getElementById('sb').addEventListener('click',go);
+document.querySelectorAll('button[data-k]').forEach(button=>button.addEventListener('click',()=>tog(button)));
+document.getElementById('salesdiv').addEventListener('click',event=>{if(event.target.closest('[data-pitch-cta]'))alert('Customize this CTA with your booking link or phone number.');});
+document.getElementById('di').addEventListener('input',event=>event.target.setCustomValidity(''));
 document.getElementById('di').addEventListener('keydown',e=>{if(e.key==='Enter')go()});
 </script>
 </body>

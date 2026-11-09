@@ -1,0 +1,54 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    name: Tests (${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npm test
+      - run: npm run security:check
+      - run: npm run check:cloudflare
+  container:
+    name: Container
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: docker build --pull --tag dmarc-able:ci .
+      - name: Verify unprivileged, read-only runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run -d --name dmarc-test --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,noexec,nosuid,size=16m -p 127.0.0.1:4174:4174 dmarc-able:ci
+          trap 'docker rm -f dmarc-test' EXIT
+          for attempt in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:4174/ > /tmp/page.html; then break; fi
+            sleep 1
+          done
+          test "$(docker exec dmarc-test id -u)" != '0'
+          test "$(curl --silent -o /dev/null -w '%{http_code}' http://127.0.0.1:4174/.env)" = '404'
+          test "$(curl --silent -o /dev/null -w '%{http_code}' http://127.0.0.1:4174/server/index.js)" = '404'
