@@ -16,7 +16,8 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="DMARC, SPF &amp; DKIM Checker — DMARC-able"><meta name="twitter:description" content="Check public DMARC, SPF, DKIM and MX records with DMARC-able. Review email authentication signals and browser HTTPS reachability without an API key."><meta name="twitter:image" content="https://dmarc-able.app/social-preview.png"><meta name="twitter:image:alt" content="DMARC-able domain security checker">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://dmarc-able.app/#website","url":"https://dmarc-able.app/","name":"DMARC-able","inLanguage":"en"},{"@type":"WebPage","@id":"https://dmarc-able.app/#webpage","url":"https://dmarc-able.app/","name":"DMARC, SPF & DKIM Checker — DMARC-able","description":"Check public DMARC, SPF, DKIM and MX records with DMARC-able. Review email authentication signals and browser HTTPS reachability without an API key.","isPartOf":{"@id":"https://dmarc-able.app/#website"},"inLanguage":"en"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=optional" rel="stylesheet">
 <style>
 :root {
   --bg:       #07090d;
@@ -39,7 +40,7 @@
   --border:   rgba(0,232,122,.10);
   --borderh:  rgba(0,232,122,.30);
   --mono:     'Share Tech Mono', monospace;
-  --disp:     'Bebas Neue', sans-serif;
+  --disp:     'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
   --sans:     'DM Sans', sans-serif;
   --glow:     0 0 24px rgba(0,232,122,.22);
   --rglow:    0 0 24px rgba(255,63,94,.22);
@@ -78,7 +79,7 @@ body::after{
   animation:scan 10s linear infinite;
   pointer-events:none;z-index:1;
 }
-@keyframes scan{to{top:160%}}
+@keyframes scan{to{transform:translateY(220vh)}}
 
 #app{position:relative;z-index:2}
 
@@ -104,7 +105,7 @@ header{
   font-family:var(--mono);
   font-size:.58rem;
   letter-spacing:.3em;
-  color:var(--txtd);
+  color:#91a8b7;
   margin-top:1px;
 }
 .hpills{display:flex;gap:.75rem;align-items:center}
