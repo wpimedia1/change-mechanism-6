@@ -11,7 +11,7 @@ try { if (await realpath(output) !== output) throw new Error('Build directory mu
 await rm(output, { recursive: true, force: true });
 await mkdir(path.join(output, '.well-known'), { recursive: true });
 const html = (await readFile(path.join(root, 'index.html'), 'utf8')).replaceAll('\r\n', '\n');
-const hashes = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/gi)].map(m => "'sha256-" + createHash('sha256').update(m[1]).digest('base64') + "'");
+const hashes = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script\b[^>]*>/gi)].map(m => "'sha256-" + createHash('sha256').update(m[1]).digest('base64') + "'");
 export const HEADERS = {
   'Content-Security-Policy': "default-src 'none'; script-src 'self' " + hashes.join(' ') + "; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https:; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'",
   'X-Content-Type-Options': 'nosniff',

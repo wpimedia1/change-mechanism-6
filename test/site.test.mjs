@@ -8,7 +8,7 @@ import { createApp } from '../server.mjs';
 import { redirectTarget, ORIGIN } from '../routing.mjs';
 import worker from '../worker.mjs';
 const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
-const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)];
+const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi)];
 test('initial HTML and CSP agree, with useful content and only factual schema', async t => {
   const app = await createApp(); app.listen(0,'127.0.0.1'); await once(app,'listening');
   t.after(()=>new Promise(resolve=>{app.closeAllConnections();app.close(resolve);}));
