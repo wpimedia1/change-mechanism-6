@@ -55,6 +55,19 @@ test('Worker keeps errors and previews noindex, and HTML cannot gain injected an
     assert.equal(r.status,path==='/404.html'?404:status);assert.equal(r.headers.get('x-robots-tag'),expected);assert.match(r.headers.get('cache-control'),/no-transform/);assert.equal(r.headers.get('content-security-policy'),"script-src 'self'");
   }
 });
+test('Worker maps only the homepage to the index asset with query and method preserved',async()=>{
+  for (const method of ['GET','HEAD']) {
+    let assetRequest;
+    const response=await worker.fetch(new Request(ORIGIN+'/?source=test',{method}),{ASSETS:{fetch:async request=>{
+      assetRequest=request;
+      return new Response(method==='HEAD'?null:html,{status:new URL(request.url).pathname==='/index.html'?200:404,headers:{'Content-Type':'text/html'}});
+    }}});
+    assert.equal(response.status,200);
+    assert.equal(assetRequest.url,ORIGIN+'/index.html?source=test');
+    assert.equal(assetRequest.method,method);
+  }
+});
+
 test('scanner starts without network calls; controls and DNS results still work under script CSP',async()=>{
   const listeners={}, elements=new Map(), calls=[];
   const element=id=>{if(!elements.has(id))elements.set(id,{value:'',dataset:{},classList:{add(){},remove(){}},addEventListener(event,fn){listeners[id+':'+event]=fn;},setCustomValidity(message){this.validationMessage=message;},reportValidity(){},appendChild(){},setAttribute(name,value){this[name]=value;}});return elements.get(id);};
