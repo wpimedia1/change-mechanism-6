@@ -1,10 +1,18 @@
-DMARC-ABLE | Web Configuration
+# DMARC-able — Domain Security Checker
+
+Live site: **https://dmarc-able.app**. Check public DMARC, SPF, DKIM and MX
+records and browser HTTPS reachability. The static homepage includes metadata,
+methodology, factual structured data and crawlable navigation.
 
 A domain security auditor for finding gaps in small business email and web configuration — and turning those gaps into sales conversations.
 
 Download `index.html`. Open it in any browser. Type a domain. That's it.
 
 No install. No account. No API key. No server. One file.
+
+The downloaded checker still runs locally from one HTML file. Production hosting
+uses a small Cloudflare routing Worker for canonical redirects and security headers;
+the Worker does not perform domain scans or receive scan results.
 
 ---
 
@@ -51,3 +59,15 @@ This meaning applies specifically to the certificate-details notice. Other `!` e
 ## Download
 
 Click `index.html` above → **Download raw file** → open it.
+
+## Develop and release
+
+Use Node 22 or later: `npm ci --ignore-scripts`, `npm run build`, then `npm start`.
+Open http://127.0.0.1:4174. Run `npm test`, `npm run check`,
+`npm run security:check` and `npm run check:cloudflare` before release.
+Cloudflare builds main with `npx wrangler deploy`; only the public build allowlist
+is uploaded. Pull requests run tests on Node 22/24, container checks and CodeQL.
+
+See [SEO.md](SEO.md) for redirects, crawl controls and owner-only Search Console
+instructions, and [SECURITY.md](SECURITY.md) for private vulnerability reporting.
+No analytics, advertising or API keys are added.
