@@ -15,8 +15,8 @@ test('initial HTML and CSP agree, with useful content and only factual schema', 
   const base='http://127.0.0.1:'+app.address().port;
   const r=await fetch(base+'/');
   assert.equal(r.status,200); assert.equal(await r.text(),html);
-  assert.equal((html.match(/<h1>/g)||[]).length,1);
-  assert.match(html,/<h1>DMARC, SPF/); assert.match(html,/rel="canonical" href="https:\/\/dmarc-able.app\/"/);
+  assert.equal((html.match(/<h1\b/g)||[]).length,1);
+  assert.match(html,/<h1 id="page-title">Here’s where to start/); assert.match(html,/rel="canonical" href="https:\/\/dmarc-able.app\/"/);
   assert.match(html,/name="description"/); assert.match(html,/id="methodology"/); assert.match(html,/<noscript>/);
   assert.doesNotMatch(html,/onclick=|cloudflareinsights|googletagmanager/);
   const schema=JSON.parse(scripts.find(s=>s[1].includes('ld+json'))[2]);
@@ -68,18 +68,46 @@ test('Worker maps only the homepage to the index asset with query and method pre
   }
 });
 
-test('scanner starts without network calls; controls and DNS results still work under script CSP',async()=>{
-  const listeners={}, elements=new Map(), calls=[];
-  const element=id=>{if(!elements.has(id))elements.set(id,{value:'',dataset:{},classList:{add(){},remove(){}},addEventListener(event,fn){listeners[id+':'+event]=fn;},setCustomValidity(message){this.validationMessage=message;},reportValidity(){},appendChild(){},setAttribute(name,value){this[name]=value;}});return elements.get(id);};
-  const buttons=['dmarc','spf','dkim','ssl','mx'].map(key=>{const b=element(key);b.dataset.k=key;return b;});
-  const context=vm.createContext({document:{getElementById:element,querySelectorAll:()=>buttons,createElement:()=>({})},fetch:async(url,options)=>{calls.push({url,options});return{json:async()=>({Answer:[{data:'"v=DMARC1; p=reject; rua=mailto:reports@example.com"'}]})};},AbortSignal,Date,Set,URL,console});
+function application(fetchImpl=async()=>({ok:true,json:async()=>({Status:0,Answer:[]})})){
+  const elements=new Map(),listeners={},calls=[];
+  const element=id=>{if(!elements.has(id))elements.set(id,{value:'',hidden:false,dataset:{},addEventListener(event,fn){listeners[id+':'+event]=fn;},focus(){},setAttribute(){},removeAttribute(){}});return elements.get(id);};
+  const audience={value:'own'},format={value:'email'};
+  const context=vm.createContext({document:{getElementById:element,querySelectorAll:()=>[],querySelector:q=>q.includes('audience')?audience:format},fetch:async(...args)=>{calls.push(args);return fetchImpl(...args);},AbortSignal,Date,Map,Set,URL,console});
   new vm.Script(scripts.find(s=>!s[1].includes('ld+json'))[2]).runInContext(context);
-  assert.equal(calls.length,0);
-  assert.ok(listeners['sb:click']);assert.ok(listeners['di:keydown']);
-  listeners['dmarc:click']();assert.equal(buttons[0]['aria-pressed'],'false');
-  listeners['dmarc:click']();assert.equal(buttons[0]['aria-pressed'],'true');
-  element('di').value='https://example.com:443';await context.go();assert.match(element('di').validationMessage,/public domain/);assert.equal(calls.length,0);
-  const result=await context.chkDMARC('example.com');assert.equal(result.policy,'reject');assert.equal(result.status,'pass');
-  assert.equal(calls.length,1);assert.ok(calls[0].url.startsWith('https://cloudflare-dns.com/dns-query?'));
+  return {context,calls,listeners,element,audience,format};
+}
+test('startup and example never request data; edited drafts survive format and recipient changes',()=>{
+  const {context,calls,element,listeners,audience,format}=application();
+  assert.equal(calls.length,0);context.exampleReport();assert.equal(calls.length,0);
+  assert.match(element('report-meta').textContent,/EXAMPLE REPORT/);
+  audience.value='help';context.renderDraft();assert.match(element('draft').value,/Hi,/);
+  element('draft').value='My own words';listeners['draft:input']();
+  element('recipient').value='Alex';context.renderDraft();assert.equal(element('draft').value,'My own words');
+  format.value='call';context.renderDraft();assert.match(element('draft').value,/Start with:/);
+  format.value='email';context.renderDraft();assert.equal(element('draft').value,'My own words');
+  context.renderDraft(true);assert.match(element('draft').value,/Hi Alex,/);
+});
+test('failed DNS remains unknown; missing records and DKIM uncertainty are distinct',async()=>{
+  const failed=application(async()=>{throw Error('network');});
+  const unknown=await failed.context.check('dmarc','example.com');assert.equal(unknown.status,'unknown');assert.doesNotMatch(unknown.title,/No DMARC/);
+  const empty=application();assert.equal((await empty.context.check('dmarc','example.com')).title,'No DMARC record found');
+  const dkim=await empty.context.check('dkim','example.com');assert.equal(dkim.status,'unknown');assert.match(dkim.why,/not proof/);
+  const invalid=application(async()=>({ok:true,json:async()=>({Status:2})}));assert.equal((await invalid.context.check('spf','example.com')).status,'unknown');
+});
+test('DMARC policy, unsafe SPF, DNS escaping, and domain validation',async()=>{
+  const {context}=application(async()=>({ok:true,json:async()=>({Status:0,Answer:[{type:16,data:'"v=spf1 +all"'}]})}));
+  assert.equal(context.dmarcResult(['v=DMARC1; p=reject'],'example.com').status,'good');
+  assert.equal(context.dmarcResult(['v=DMARC1; p=none'],'example.com').status,'review');
+  assert.match(context.dmarcResult(['v=DMARC1; p=reject','v=DMARC1; p=none'],'example.com').title,/More than one/);
+  assert.equal((await context.check('spf','example.com')).status,'review');
+  for(const domain of ['127.0.0.1','localhost','https://example.com:443','https://user@example.com','foo.local'])assert.throws(()=>context.domainName(domain));
+  assert.equal(context.domainName('https://Example.com/path'),'example.com');
   assert.equal(context.esc('<img src=x onerror=alert(1)>'),'&lt;img src=x onerror=alert(1)&gt;');
+});
+test('drafts explain the actual finding without fabricated sales claims',()=>{
+  const {context}=application();const finding=context.dmarcResult([],'example.com');
+  const email=context.makeDraft(finding,'example.com','help','email','Alex');
+  assert.match(email,/Hi Alex,/);assert.match(email,/didn’t find a DMARC record/);assert.doesNotMatch(email,/hacked|guarantee|book a|free audit/i);
+  const own=context.makeDraft(finding,'example.com','own','email');assert.match(own,/My next step/);assert.doesNotMatch(own,/Hi Alex/);
+  assert.match(context.makeDraft(context.unknown('dmarc','failed'),'example.com','help','email'),/couldn’t complete/);
 });

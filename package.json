@@ -10,10 +10,11 @@
     "build": "node scripts/build.mjs",
     "start": "node server.mjs",
     "test": "npm run build && node --test test/*.test.mjs",
-    "check": "node --check worker.mjs && node --check server.mjs && node --check scripts/build.mjs",
+    "check": "node --check worker.mjs && node --check server.mjs && node --check scripts/build.mjs && node --check design-source/repair-bench.js && node --check scripts/compose-ui.mjs",
     "security:check": "node scripts/security-check.mjs",
     "check:cloudflare": "wrangler deploy --dry-run --outdir dist-worker",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "compose": "node scripts/compose-ui.mjs"
   },
   "devDependencies": {
     "wrangler": "4.158.0"

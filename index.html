@@ -6,7 +6,7 @@
 <title>DMARC, SPF &amp; DKIM Checker — DMARC-able</title>
 <meta name="description" content="Check public DMARC, SPF, DKIM and MX records with DMARC-able. Review email authentication signals and browser HTTPS reachability without an API key.">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#07090d">
+<meta name="theme-color" content="#0b1b46">
 <link rel="canonical" href="https://dmarc-able.app/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website"><meta property="og:site_name" content="DMARC-able"><meta property="og:locale" content="en_US">
@@ -17,878 +17,167 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://dmarc-able.app/#website","url":"https://dmarc-able.app/","name":"DMARC-able","inLanguage":"en"},{"@type":"WebPage","@id":"https://dmarc-able.app/#webpage","url":"https://dmarc-able.app/","name":"DMARC, SPF & DKIM Checker — DMARC-able","description":"Check public DMARC, SPF, DKIM and MX records with DMARC-able. Review email authentication signals and browser HTTPS reachability without an API key.","isPartOf":{"@id":"https://dmarc-able.app/#website"},"inLanguage":"en"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=optional" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:       #07090d;
-  --s1:       #0c1018;
-  --s2:       #121820;
-  --s3:       #19212c;
-  --green:    #00e87a;
-  --green2:   #00b85e;
-  --gdim:     rgba(0,232,122,.10);
-  --gbright:  rgba(0,232,122,.25);
-  --red:      #ff3f5e;
-  --rdim:     rgba(255,63,94,.10);
-  --amber:    #ffb200;
-  --adim:     rgba(255,178,0,.10);
-  --blue:     #3b9eff;
-  --bdim:     rgba(59,158,255,.10);
-  --txt:      #b8ccd8;
-  --txtd:     #445566;
-  --txtb:     #e4f0f8;
-  --border:   rgba(0,232,122,.10);
-  --borderh:  rgba(0,232,122,.30);
-  --mono:     'Share Tech Mono', monospace;
-  --disp:     'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
-  --sans:     'DM Sans', sans-serif;
-  --glow:     0 0 24px rgba(0,232,122,.22);
-  --rglow:    0 0 24px rgba(255,63,94,.22);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--txt);
-  font-family:var(--sans);
-  min-height:100vh;
-  overflow-x:hidden;
-}
+:root{--navy:#0b1b46;--ink:#101a34;--blue:#0649e8;--yellow:#ffd32a;--line:#dce3ed;--muted:#52617b;--paper:#fff;--soft:#f3f6fa;font-family:'DM Sans',Arial,sans-serif;color:var(--ink);font-synthesis:none;background:var(--paper)}
+*{box-sizing:border-box}body{margin:0}button,input,textarea{font:inherit}button,a,input,textarea,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:wait;opacity:.6}a{color:var(--blue);text-underline-offset:4px}button,input,textarea{border-radius:6px}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #658cff;outline-offset:4px}button{transition:background .15s,box-shadow .15s}button:hover{filter:brightness(.97)}[hidden]{display:none!important}.icon{width:23px;height:23px;flex-shrink:0;vertical-align:middle}.icon.blue{filter:invert(21%) sepia(99%) saturate(4838%) hue-rotate(221deg) brightness(89%)}.icon.white{filter:brightness(0) invert(1)}.skip{position:fixed;top:-100px;left:20px;background:white;padding:12px;z-index:20}.skip:focus{top:12px}
+.masthead{height:66px;background:var(--navy);color:white;padding:0 30px;display:flex;align-items:center;gap:28px}.brand{display:flex;align-items:center;gap:12px;font-size:27px;font-weight:800;color:white;text-decoration:none;letter-spacing:-.6px}.brand .icon{width:31px;height:31px}.product-label{font-size:23px;font-weight:750;border-left:1px solid #65718e;padding-left:28px}.privacy-line{margin-left:auto;font-size:14px}.toolbar{min-height:82px;display:flex;gap:24px;align-items:center;padding:17px 24px;border-bottom:1px solid var(--line);background:white}.audience{display:flex;align-items:center;gap:10px;border:0;padding:0;margin:0;flex-shrink:0}.audience legend{float:left;margin-right:14px;font-size:14px;font-weight:750;padding:10px 0}.choice{display:flex;gap:10px;align-items:center;padding:11px 14px;border-radius:6px;background:var(--soft);font-size:14px;font-weight:650;cursor:pointer;white-space:nowrap}.choice:has(input:checked){background:#fff1b9}.choice input{accent-color:var(--blue);width:18px;height:18px;margin:0}.scan-form{display:flex;gap:12px;align-items:center;flex:1;border-left:1px solid var(--line);padding-left:24px;min-width:0}.scan-form>label{font-weight:700;font-size:14px}.scan-form input{border:1px solid #aab9d2;height:46px;padding:0 14px;width:100%;min-width:100px;flex:1;color:var(--ink)}.primary,.secondary{height:46px;padding:0 19px;border:1px solid var(--blue);display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:650;white-space:nowrap}.primary{background:var(--blue);color:white}.secondary{background:white;border-color:#b8c5da;color:var(--ink)}.toolbar>.secondary{flex-shrink:0}.workbench{display:grid;grid-template-columns:166px minmax(0,1fr);min-height:calc(100vh - 148px)}.rail{background:var(--navy);color:white;padding:30px 12px;display:flex;flex-direction:column;gap:24px}.rail button{border:0;background:transparent;color:#c6d2ea;display:flex;align-items:center;gap:12px;text-align:left;padding:12px;font-size:14px;font-weight:600;min-height:52px}.rail button[aria-current=step]{background:#142f70;color:white}.step-number{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#d9e1ef;color:var(--navy);flex-shrink:0;font-size:15px;font-weight:750}.rail button[aria-current=step] .step-number{background:var(--yellow)}
+.workspace{padding:34px 30px 30px 38px;min-width:0}.columns{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(320px,1fr);gap:30px}.report{min-width:0}.report-heading{margin-bottom:30px}h1{font-size:44px;line-height:1.15;letter-spacing:-1.6px;margin:0 0 7px;font-weight:800}.lede{font-size:20px;line-height:1.5;margin:0}.report-meta{font-size:12px;line-height:1.5;color:var(--muted);margin:10px 0 0;min-height:18px}.report-meta strong{color:#795300}.finding{border-left:6px solid #f3bc00;background:#fffbec;border-radius:7px;overflow:hidden}.finding.good{border-color:#28945d;background:#f0faf4}.finding.unknown{border-color:#99aac3;background:#f4f7fb}.finding h2{margin:0;background:#fff0b2;padding:13px 18px;display:flex;align-items:flex-start;gap:12px;font-size:32px;letter-spacing:-.9px;line-height:1.25}.finding.good h2{background:#dff3e7}.finding.unknown h2{background:#e9eff7}.finding h2 .icon{width:30px;height:30px;margin-top:2px}.explanation{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:19px 18px 23px;gap:18px}.explanation>div+div{border-left:1px solid #dedccf;padding-left:18px}.explanation h3{font-size:17px;line-height:1.3;margin:0 0 10px;letter-spacing:-.3px}.explanation p{font-size:14px;line-height:1.55;margin:0}.evidence{margin:20px 0 28px;background:#eef3f9;border-radius:6px}.evidence summary{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;font-size:14px;list-style:none}.evidence summary::-webkit-details-marker{display:none}.evidence summary .icon{width:18px;height:18px}.evidence[open] summary .icon{transform:rotate(180deg)}.evidence summary strong{white-space:nowrap}.evidence-summary{font-family:ui-monospace,monospace;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-left:1px solid #cbd5e6;padding-left:18px}.evidence pre{font-size:12px;line-height:1.6;margin:0;padding:0 20px 18px;white-space:pre-wrap;overflow-wrap:anywhere}.other h2{font-size:27px;letter-spacing:-.7px;margin:0 0 16px}.check-head,.check-row{display:grid;grid-template-columns:135px 175px minmax(0,1fr);gap:16px;align-items:start}.check-head{background:#e7edf6;border-radius:6px;padding:10px 15px;font-size:14px;font-weight:750}.check-row{padding:15px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.45}.check-name{display:flex;align-items:center;gap:15px;padding-top:4px;font-weight:750}.check-row p{margin:0}.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:650;padding:5px 9px;border-radius:5px;background:#fff1b9;color:#574300;max-width:100%;line-height:1.3}.status.good{background:#e1f8e9;color:#175934}.status.unknown{background:#edf1f7;color:#465771}.status .icon{width:17px;height:17px}.check-evidence{grid-column:1/-1}.check-evidence summary{cursor:pointer;font-size:12px;color:#405e91}.check-evidence pre{font:12px/1.5 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:10px;background:var(--soft);margin-bottom:0}.composer{border-left:1px solid #c6d1e3;padding-left:30px;min-width:0}.composer h2{font-size:29px;letter-spacing:-1px;margin:0 0 22px;line-height:1.2}.formats{display:flex;gap:12px;margin-bottom:28px;border:0;padding:0}.formats .choice{border:1px solid #cad5e7;background:white;flex:1;font-size:15px;justify-content:center}.formats .choice:has(input:checked){border-color:#fff1b9;background:#fff1b9}.field-label{display:block;font-size:14px;font-weight:750;margin:0 0 11px}.recipient{border:1px solid #aab9d2;width:100%;height:53px;padding:12px 15px;margin-bottom:25px;font-size:15px;color:var(--ink)}.recipient::placeholder{color:#63738f}.draft{display:block;resize:vertical;min-height:380px;width:100%;border:1px solid #aab9d2;padding:15px;font-size:18px;line-height:1.55;color:var(--ink);background:white}.draft:disabled{background:var(--soft);color:var(--muted)}.draft-hint{font-size:13px;font-style:italic;margin:12px 0 20px;line-height:1.5}.composer .primary{width:100%;margin-top:10px}.draft-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:28px}.text-button{border:0;background:none;color:var(--blue);padding:5px 0;font-size:12px;text-decoration:underline;text-underline-offset:3px}.message-status{font-size:12px;line-height:1.5;color:var(--muted);margin:8px 0;min-height:18px}.loading{padding:18px;background:#eef3ff;border-radius:6px;margin-bottom:20px;font-size:14px}.loading progress{width:100%;height:6px;accent-color:var(--blue);margin-top:12px}.empty{background:#f4f7fc;padding:28px;border-left:5px solid var(--blue);border-radius:6px}.empty h2{font-size:26px;letter-spacing:-.7px;margin:0 0 12px}.empty p{line-height:1.65;font-size:15px;max-width:55ch}.empty ol{padding-left:20px;font-size:15px;line-height:2}.empty button{margin-top:10px}.scan-options{margin-top:24px;font-size:13px}.scan-options summary{cursor:pointer;font-weight:650}.options-body{padding-top:14px;display:flex;gap:15px;flex-wrap:wrap}.options-body label{display:flex;align-items:center;gap:6px}.options-body input{accent-color:var(--blue)}.options-note{line-height:1.6;color:var(--muted)}.notice{padding:12px;background:#fff6d7;font-size:13px;line-height:1.5;margin:12px 0;border-radius:5px}.methodology{border-top:1px solid var(--line);margin:40px 0 0;padding-top:20px;font-size:13px;line-height:1.65;color:var(--muted)}.methodology summary{cursor:pointer;color:var(--ink);font-weight:650}.methodology h2{font-size:19px;color:var(--ink);margin-top:20px}.methodology h3{font-size:15px;color:var(--ink);margin-bottom:5px}.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}.footer{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:12px;color:var(--muted)}.footer a{color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1600px){.workspace{max-width:1500px;width:100%;margin:auto}.columns{gap:40px}.composer{padding-left:40px}.draft{min-height:355px}}
+@media(max-width:1250px){.toolbar{flex-wrap:wrap;gap:14px}.scan-form{order:3;flex-basis:100%;padding:0;border:0}.toolbar>.secondary{margin-left:auto}.masthead{gap:20px}.product-label{padding-left:20px}.workbench{grid-template-columns:136px 1fr}.workspace{padding:28px 22px}.columns{grid-template-columns:minmax(0,1.5fr) minmax(290px,1fr);gap:22px}.composer{padding-left:22px}.check-head,.check-row{grid-template-columns:90px 130px 1fr;gap:10px}.check-name{gap:8px}.check-name .icon{width:20px}.explanation{gap:12px;padding:16px 14px}.explanation>div+div{padding-left:12px}h1{font-size:34px}.finding h2{font-size:24px}.composer h2{font-size:25px}.lede{font-size:17px}.privacy-line{font-size:12px}}
+@media(max-width:950px){.workbench{grid-template-columns:136px 1fr}.rail{padding:20px 5px;gap:18px}.rail button{font-size:12px;gap:8px;padding:10px 7px}.step-number{width:24px;height:24px}.columns{grid-template-columns:1fr}.composer{border-left:0;border-top:1px solid var(--line);padding:28px 0 0;margin-top:10px}.draft{min-height:260px}.privacy-line{display:none}.check-head,.check-row{grid-template-columns:110px 155px 1fr}.explanation{gap:18px}.explanation>div+div{padding-left:18px}.composer .formats{max-width:430px}.composer .primary{max-width:430px}.report-heading{margin-bottom:24px}}
+@media(max-width:600px){.masthead{height:62px;padding:0 18px;gap:14px}.brand{font-size:22px;gap:8px}.brand .icon{width:25px;height:25px}.product-label{font-size:15px;padding-left:14px}.toolbar{padding:16px;gap:14px}.audience{gap:7px;width:100%}.audience legend{margin-right:7px;font-size:12px}.choice{font-size:12px;padding:10px 9px;gap:7px}.choice input{width:17px;height:17px}.scan-form{flex-wrap:wrap;gap:8px}.scan-form>label{width:100%;font-size:12px}.scan-form input{flex-basis:140px}.scan-form .primary{font-size:13px;padding:0 12px}.scan-form .primary .icon{width:19px}.toolbar>.secondary{order:4;width:100%;height:39px;font-size:13px}.workbench{display:block}.rail{flex-direction:row;padding:10px 12px;gap:7px;justify-content:space-between}.rail button{flex:1;justify-content:center;min-height:42px;padding:7px 5px}.workspace{padding:26px 18px}.columns{gap:24px}h1{font-size:31px;letter-spacing:-1.2px}.lede{font-size:16px}.report-meta{font-size:11px}.finding h2{font-size:23px;padding:14px}.explanation{display:block;padding:17px}.explanation>div+div{border:0;border-top:1px solid #e6e0c9;padding:16px 0 0;margin-top:16px}.explanation h3{font-size:16px;margin-bottom:7px}.explanation p{font-size:14px}.evidence summary{gap:8px;flex-wrap:wrap;font-size:13px}.evidence-summary{padding-left:0;border:0;flex-basis:100%;padding-top:3px}.other h2{font-size:24px}.check-head{display:none}.check-row{grid-template-columns:1fr 1.3fr;padding:15px 3px;gap:10px}.check-row>p{grid-column:1/-1}.check-row>.status{justify-self:end}.check-name{font-size:15px}.composer{margin:0}.composer h2{font-size:27px}.formats{margin-bottom:24px}.draft{font-size:17px;min-height:310px}.method-grid{grid-template-columns:1fr}.footer{gap:14px}.methodology{margin-top:28px}.empty{padding:21px}.empty h2{font-size:24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
-/* ── GRID TEXTURE ── */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background-image:
-    linear-gradient(rgba(0,232,122,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,232,122,.025) 1px,transparent 1px);
-  background-size:40px 40px;
-  pointer-events:none;z-index:0;
-}
-body::after{
-  content:'';
-  position:fixed;inset:0;
-  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,232,122,.05) 0%,transparent 70%);
-  pointer-events:none;z-index:0;
-}
+.check-evidence{margin-top:8px}.check-row>div{min-width:0}@media(max-width:600px){.check-row>div{grid-column:1/-1}}
 
-/* ── SCANLINE ── */
-.sl{
-  position:fixed;top:-60%;left:0;right:0;height:60%;
-  background:linear-gradient(transparent 0%,rgba(0,232,122,.025) 50%,transparent 100%);
-  animation:scan 10s linear infinite;
-  pointer-events:none;z-index:1;
-}
-@keyframes scan{to{transform:translateY(220vh)}}
-
-#app{position:relative;z-index:2}
-
-/* ── HEADER ── */
-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.2rem 2.5rem;
-  border-bottom:1px solid var(--border);
-  background:rgba(7,9,13,.85);
-  backdrop-filter:blur(16px);
-  position:sticky;top:0;z-index:200;
-}
-.logo{
-  font-family:var(--disp);
-  font-size:2rem;
-  letter-spacing:.18em;
-  color:var(--green);
-  text-shadow:var(--glow);
-  line-height:1;
-}
-.logo small{
-  display:block;
-  font-family:var(--mono);
-  font-size:.58rem;
-  letter-spacing:.3em;
-  color:#91a8b7;
-  margin-top:1px;
-}
-.hpills{display:flex;gap:.75rem;align-items:center}
-.pill{
-  font-family:var(--mono);font-size:.6rem;
-  letter-spacing:.12em;
-  padding:.28rem .7rem;
-  border-radius:2px;
-  border:1px solid var(--border);
-  color:var(--txtd);
-}
-.pill.on{border-color:var(--green);color:var(--green);background:var(--gdim);box-shadow:var(--glow)}
-.pill.on::before{content:'● ';animation:blink 1.2s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-
-/* ── HERO ── */
-.hero{
-  text-align:center;
-  padding:4rem 2rem 2.5rem;
-  max-width:900px;
-  margin:0 auto;
-}
-.hero h1{
-  font-family:var(--disp);
-  font-size:clamp(3.5rem,9vw,8rem);
-  letter-spacing:.08em;
-  color:var(--txtb);
-  line-height:.92;
-  margin-bottom:.6rem;
-}
-.hero h1 em{color:var(--green);font-style:normal;text-shadow:var(--glow)}
-.hero .sub{
-  font-family:var(--mono);
-  font-size:.72rem;
-  letter-spacing:.22em;
-  color:var(--txtd);
-  margin-bottom:2.5rem;
-}
-
-/* ── INPUT ZONE ── */
-.izone{
-  display:flex;
-  max-width:720px;
-  margin:0 auto;
-  border:1px solid var(--borderh);
-  border-radius:3px;
-  overflow:hidden;
-  box-shadow:var(--glow),inset 0 0 60px rgba(0,232,122,.03);
-  transition:box-shadow .3s;
-}
-.izone:focus-within{
-  box-shadow:0 0 50px rgba(0,232,122,.35),inset 0 0 60px rgba(0,232,122,.05);
-}
-.ipfx{
-  display:flex;align-items:center;
-  padding:0 1rem;
-  background:var(--gdim);
-  border-right:1px solid var(--borderh);
-  font-family:var(--mono);font-size:.85rem;
-  color:var(--green);
-  white-space:nowrap;user-select:none;
-}
-#di{
-  flex:1;
-  background:var(--s1);border:none;outline:none;
-  padding:1rem 1.25rem;
-  color:var(--txtb);
-  font-family:var(--mono);font-size:1.05rem;
-  letter-spacing:.04em;
-}
-#di::placeholder{color:var(--txtd)}
-#sb{
-  background:var(--green);border:none;
-  padding:0 2rem;
-  cursor:pointer;
-  font-family:var(--disp);font-size:1.35rem;
-  letter-spacing:.15em;
-  color:var(--bg);
-  transition:all .2s;
-  white-space:nowrap;
-}
-#sb:hover{background:#00ffaa;box-shadow:var(--glow)}
-#sb:active{transform:scale(.98)}
-#sb:disabled{background:var(--txtd);cursor:not-allowed}
-
-/* ── CHECK TOGGLES ── */
-.toggles{
-  display:flex;gap:.6rem;justify-content:center;
-  margin-top:1rem;flex-wrap:wrap;
-}
-.tog{
-  display:flex;align-items:center;gap:.45rem;
-  padding:.35rem .85rem;
-  border:1px solid var(--border);border-radius:2px;
-  cursor:pointer;
-  font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;
-  color:var(--txtd);
-  transition:all .2s;user-select:none;
-}
-.tog.on{border-color:var(--green);color:var(--green);background:var(--gdim)}
-.tog .d{width:5px;height:5px;border-radius:50%;background:currentColor}
-
-/* ── RESULTS ── */
-#rp{display:none;margin-top:2.5rem;padding:0 2.5rem 3rem;max-width:1400px;margin-left:auto;margin-right:auto;animation:fadeup .4s ease}
-@keyframes fadeup{from{opacity:0;transform:translateY(16px)}}
-
-/* target bar */
-.tbar{
-  display:flex;align-items:center;gap:1.5rem;
-  padding:1.2rem 1.5rem;
-  background:var(--s1);
-  border:1px solid var(--border);
-  border-left:3px solid var(--green);
-  margin-bottom:1.5rem;
-}
-.tdomain{font-family:var(--disp);font-size:2.2rem;letter-spacing:.1em;color:var(--green);text-shadow:var(--glow)}
-.tmeta{font-family:var(--mono);font-size:.65rem;color:var(--txtd);letter-spacing:.08em;line-height:2}
-.tscore{margin-left:auto;text-align:center;min-width:80px}
-.tscore .num{font-family:var(--disp);font-size:3rem;line-height:1;color:var(--txtb);transition:color .6s}
-.tscore .lbl{font-family:var(--mono);font-size:.55rem;color:var(--txtd);letter-spacing:.15em}
-
-/* progress */
-.pbar{height:2px;background:var(--border);border-radius:1px;overflow:hidden;margin-bottom:1.5rem}
-.pfill{height:100%;background:var(--green);box-shadow:0 0 8px var(--green);transition:width .4s ease;border-radius:1px}
-
-/* grid */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin-bottom:1.1rem}
-@media(max-width:760px){.grid{grid-template-columns:1fr}}
-.fw{grid-column:1/-1}
-
-/* cards */
-.card{
-  background:var(--s1);
-  border:1px solid var(--border);
-  border-radius:3px;
-  overflow:hidden;
-  transition:border-color .3s;
-}
-.card.pass{border-color:rgba(0,232,122,.28)}
-.card.fail{border-color:rgba(255,63,94,.28)}
-.card.warn{border-color:rgba(255,178,0,.28)}
-.card.skip{border-color:var(--border);opacity:.45}
-
-.ch{
-  display:flex;align-items:center;gap:.7rem;
-  padding:.85rem 1.1rem;
-  border-bottom:1px solid rgba(255,255,255,.04);
-}
-.cico{font-size:1rem;width:22px;text-align:center;flex-shrink:0}
-.cname{font-family:var(--disp);font-size:1.05rem;letter-spacing:.1em;color:var(--txtb);flex:1}
-.cbadge{
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;
-  padding:.22rem .55rem;border-radius:2px;
-}
-.bp{background:var(--gdim);color:var(--green);border:1px solid rgba(0,232,122,.25)}
-.bf{background:var(--rdim);color:var(--red);border:1px solid rgba(255,63,94,.25)}
-.bw{background:var(--adim);color:var(--amber);border:1px solid rgba(255,178,0,.25)}
-.bs{background:rgba(68,85,102,.1);color:var(--txtd);border:1px solid var(--border)}
-.bsc{background:var(--bdim);color:var(--blue);border:1px solid rgba(59,158,255,.25)}
-
-.cb{padding:.9rem 1.1rem}
-
-.rec{
-  font-family:var(--mono);font-size:.68rem;line-height:1.75;
-  color:var(--txtd);
-  background:rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.04);
-  padding:.7rem;border-radius:2px;
-  word-break:break-all;white-space:pre-wrap;
-  margin-bottom:.7rem;
-  max-height:130px;overflow-y:auto;
-}
-.rec .g{color:var(--green)}
-.rec .a{color:var(--amber)}
-.rec .r{color:var(--red)}
-
-.alist{list-style:none;margin-top:.4rem}
-.alist li{
-  font-family:var(--mono);font-size:.68rem;
-  padding:.28rem 0;color:var(--txtd);
-  border-bottom:1px solid rgba(255,255,255,.03);
-  display:flex;gap:.45rem;align-items:flex-start;
-}
-.alist li:last-child{border-bottom:none}
-.alist li::before{content:'→';flex-shrink:0;margin-top:.05rem}
-.alist li.ok::before{content:'✓';color:var(--green)}
-.alist li.bad::before{content:'✗';color:var(--red)}
-.alist li.w::before{content:'!';color:var(--amber)}
-
-.cnote{
-  font-family:var(--mono);font-size:.62rem;
-  color:var(--txtd);opacity:.65;
-  margin-top:.65rem;line-height:1.6;
-}
-
-/* ── SALES PANEL ── */
-.sp{
-  background:var(--s1);
-  border:1px solid rgba(255,63,94,.25);
-  border-left:3px solid var(--red);
-  border-radius:3px;
-  padding:1.5rem;
-  box-shadow:var(--rglow);
-  position:relative;overflow:hidden;
-}
-.sp::after{
-  content:'OPPORTUNITY';
-  font-family:var(--disp);
-  font-size:6rem;letter-spacing:.08em;
-  color:rgba(255,63,94,.04);
-  position:absolute;right:-5px;bottom:-10px;
-  pointer-events:none;line-height:1;
-  user-select:none;
-}
-.sh{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}
-.sico{
-  width:38px;height:38px;
-  background:var(--rdim);
-  border:1px solid rgba(255,63,94,.25);
-  border-radius:2px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;flex-shrink:0;
-}
-.stitle{font-family:var(--disp);font-size:1.4rem;letter-spacing:.1em;color:var(--red)}
-.ssub{font-family:var(--mono);font-size:.6rem;color:var(--txtd);letter-spacing:.1em;margin-top:2px}
-
-/* sales content */
-.scont{position:relative;z-index:1}
-.scont .opener{
-  font-size:.95rem;font-weight:500;color:var(--txtb);
-  line-height:1.6;margin-bottom:.9rem;
-  font-style:italic;
-}
-.scont .opener::before{content:'"';color:var(--red);font-size:1.4rem;line-height:0;vertical-align:-.3em;margin-right:2px}
-.scont .opener::after{content:'"';color:var(--red);font-size:1.4rem;line-height:0;vertical-align:-.3em;margin-left:2px}
-.scont .body{font-size:.84rem;color:var(--txt);line-height:1.75;margin-bottom:.9rem}
-.scont .body strong{color:var(--txtb);font-weight:500}
-
-.stips{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:.75rem;margin-top:1rem;
-}
-.stip{
-  background:rgba(255,63,94,.06);
-  border:1px solid rgba(255,63,94,.15);
-  border-radius:2px;
-  padding:.75rem 1rem;
-}
-.stip .tlabel{
-  font-family:var(--mono);font-size:.58rem;
-  color:var(--red);letter-spacing:.12em;
-  margin-bottom:.4rem;
-}
-.stip .ttext{font-size:.78rem;color:var(--txt);line-height:1.55}
-
-.cta{
-  display:inline-block;
-  margin-top:1.1rem;
-  padding:.55rem 1.25rem;
-  background:var(--rdim);
-  border:1px solid var(--red);
-  border-radius:2px;
-  font-family:var(--mono);font-size:.7rem;
-  letter-spacing:.1em;color:var(--red);
-  cursor:pointer;transition:all .2s;
-}
-.cta:hover{background:var(--red);color:var(--bg);box-shadow:var(--rglow)}
-
-/* log */
-.log{
-  font-family:var(--mono);font-size:.65rem;
-  color:var(--txtd);letter-spacing:.04em;
-  line-height:2;
-  margin-top:1.1rem;
-  max-height:110px;overflow-y:auto;
-  padding:.65rem .8rem;
-  background:rgba(0,0,0,.45);
-  border:1px solid rgba(255,255,255,.04);
-  border-radius:2px;
-}
-.le{display:flex;gap:1rem}
-.lt{color:var(--txtd);flex-shrink:0;opacity:.55}
-.lm{color:var(--txtd)}
-.lm.g{color:var(--green)}.lm.r{color:var(--red)}.lm.a{color:var(--amber)}.lm.b{color:var(--blue)}
-
-.pulse{animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.shim{
-  background:linear-gradient(90deg,var(--s2) 25%,var(--s3) 50%,var(--s2) 75%);
-  background-size:200% 100%;
-  animation:shim 1.4s infinite;
-  border-radius:2px;height:11px;
-}
-@keyframes shim{to{background-position:-200% 0}}
-
-::-webkit-scrollbar{width:3px;height:3px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--borderh);border-radius:2px}
-
-footer{
-  text-align:center;padding:1.5rem;
-  border-top:1px solid var(--border);
-  font-family:var(--mono);font-size:.6rem;
-  color:var(--txtd);letter-spacing:.15em;
-}
-
-.logo{text-decoration:none}.hero h1{font-size:clamp(2.7rem,7vw,6.3rem);line-height:1.04;letter-spacing:.035em}
-.intro{max-width:680px;margin:0 auto 1.8rem;line-height:1.65;color:var(--txt)}
-.hero .sub{color:#91a8b7;margin-bottom:1.2rem;line-height:1.6}
-#di{min-width:0}.tog{background:var(--s1);min-height:40px;color:#91a8b7}
-.scan-note{max-width:760px;margin:0 auto 1.5rem;padding:0 24px;font-size:.85rem;line-height:1.6;color:#91a8b7}
-.methodology{max-width:1040px;margin:3rem auto;padding:2rem;border-top:1px solid var(--borderh);line-height:1.75}
-.methodology h2{font-family:var(--disp);font-size:2.2rem;font-weight:400;color:var(--green);margin-bottom:.8rem}
-.methodology h3{font-size:1.1rem;color:var(--txtb);margin:1rem 0 .4rem}.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem;margin-bottom:1rem}
-.methodology a,footer a{color:var(--green);text-underline-offset:4px}footer{color:#91a8b7;line-height:1.8}
-footer nav{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:12px;font-size:.75rem}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--green);outline-offset:4px}
-.skip{position:fixed;top:-100px;left:16px;z-index:10;background:var(--green);color:var(--bg);padding:12px}.skip:focus{top:12px}
-@media(max-width:600px){header{flex-wrap:wrap;gap:16px;padding:20px}.logo{font-size:1.8rem}.hpills{flex-wrap:wrap}.hero{padding:2.5rem 18px 1.5rem}.hero h1{font-size:clamp(2.3rem,10vw,3.8rem)}.hero .sub{font-size:.6rem;letter-spacing:.1em}.ipfx{padding:0 .6rem;font-size:.7rem}#di{padding:1rem .65rem;font-size:.9rem}#sb{padding:0 .8rem}.intro{font-size:.9rem}.methodology{padding:1.5rem}.method-grid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="sl"></div>
-<a class="skip" href="#checker">Skip to domain checker</a>
-<div id="app">
-
-<header>
-  <a class="logo" href="/" aria-label="DMARC-able home">DMARC-able<small>// DOMAIN SECURITY CHECKER</small></a>
-  <div class="hpills">
-    <div class="pill on">● DNS-OVER-HTTPS</div>
-    <div class="pill on">● ZERO DEPENDENCIES</div>
-    <div class="pill on">● LOCAL</div>
-  </div>
-</header>
-
-<main id="checker">
-<div class="hero">
-  <h1>DMARC, SPF<br>&amp; <em>DKIM CHECKER</em></h1>
-  <p class="sub">// PUBLIC EMAIL RECORDS · HTTPS REACHABILITY · CLEARER NEXT STEPS //</p>
-
-  <p class="intro">Check your domain’s public email authentication records, explore common DKIM selectors, and test browser HTTPS reachability. Review the findings before planning changes.</p>
-  <div class="izone">
-    <label class="ipfx" for="di">DOMAIN</label>
-    <input id="di" type="text" aria-describedby="scan-note" inputmode="url" autocapitalize="none" placeholder="example.com" autocomplete="off" spellcheck="false"/>
-    <button id="sb">SCAN</button>
-  </div>
-
-  <div class="toggles">
-    <button type="button" class="tog on" data-k="dmarc" aria-pressed="true"><span class="d"></span>DMARC</button>
-    <button type="button" class="tog on" data-k="spf" aria-pressed="true"><span class="d"></span>SPF</button>
-    <button type="button" class="tog on" data-k="dkim" aria-pressed="true"><span class="d"></span>DKIM</button>
-    <button type="button" class="tog on" data-k="ssl" aria-pressed="true"><span class="d"></span>SSL / 443</button>
-    <button type="button" class="tog on" data-k="mx" aria-pressed="true"><span class="d"></span>MX RECORDS</button>
-  </div>
+<a class="skip" href="#report">Skip to results</a>
+<header class="masthead"><a class="brand" href="/"><img class="icon white" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMDgsNDBINDhBMTYsMTYsMCwwLDAsMzIsNTZ2NTZjMCw1Mi43MiwyNS41Miw4NC42Nyw0Ni45MywxMDIuMTksMjMuMDYsMTguODYsNDYsMjUuMjYsNDcsMjUuNTNhOCw4LDAsMCwwLDQuMiwwYzEtLjI3LDIzLjkxLTYuNjcsNDctMjUuNTNDMTk4LjQ4LDE5Ni42NywyMjQsMTY0LjcyLDIyNCwxMTJWNTZBMTYsMTYsMCwwLDAsMjA4LDQwWm0wLDcyYzAsMzcuMDctMTMuNjYsNjcuMTYtNDAuNiw4OS40MkExMjkuMywxMjkuMywwLDAsMSwxMjgsMjIzLjYyYTEyOC4yNSwxMjguMjUsMCwwLDEtMzguOTItMjEuODFDNjEuODIsMTc5LjUxLDQ4LDE0OS4zLDQ4LDExMmwwLTU2LDE2MCwwWk04Mi4zNCwxNDEuNjZhOCw4LDAsMCwxLDExLjMyLTExLjMyTDExMiwxNDguNjlsNTAuMzQtNTAuMzVhOCw4LDAsMCwxLDExLjMyLDExLjMybC01Niw1NmE4LDgsMCwwLDEtMTEuMzIsMFoiLz48L3N2Zz4=" width="24" height="24" alt=""> DMARC-able</a><span class="product-label">Repair Bench</span><span class="privacy-line">Browser-only checks · No changes to your domain</span></header>
+<div class="toolbar">
+<fieldset class="audience"><legend>Audience</legend><label class="choice"><input type="radio" name="audience" value="own" checked> My domain</label><label class="choice"><input type="radio" name="audience" value="help"> Helping someone</label></fieldset>
+<form id="scan-form" class="scan-form"><label for="domain">Domain</label><input id="domain" name="domain" type="text" placeholder="yourdomain.com" autocomplete="url" autocapitalize="none" spellcheck="false" required aria-describedby="scan-error"><button class="primary" id="scan-button" type="submit"><img class="icon white" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjkuNjYsMjE4LjM0bC01MC4wNy01MC4wNmE4OC4xMSw4OC4xMSwwLDEsMC0xMS4zMSwxMS4zMWw1MC4wNiw1MC4wN2E4LDgsMCwwLDAsMTEuMzItMTEuMzJaTTQwLDExMmE3Miw3MiwwLDEsMSw3Miw3MkE3Mi4wOCw3Mi4wOCwwLDAsMSw0MCwxMTJaIi8+PC9zdmc+" width="24" height="24" alt=""> Check domain</button></form>
+<button class="secondary" id="example" type="button"><img class="icon blue" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMTMuNjYsODIuMzRsLTU2LTU2QTgsOCwwLDAsMCwxNTIsMjRINTZBMTYsMTYsMCwwLDAsNDAsNDBWMjE2YTE2LDE2LDAsMCwwLDE2LDE2SDIwMGExNiwxNiwwLDAsMCwxNi0xNlY4OEE4LDgsMCwwLDAsMjEzLjY2LDgyLjM0Wk0xNjAsNTEuMzEsMTg4LjY5LDgwSDE2MFpNMjAwLDIxNkg1NlY0MGg4OFY4OGE4LDgsMCwwLDAsOCw4aDQ4VjIxNlptLTMyLTgwYTgsOCwwLDAsMS04LDhIOTZhOCw4LDAsMCwxLDAtMTZoNjRBOCw4LDAsMCwxLDE2OCwxMzZabTAsMzJhOCw4LDAsMCwxLTgsOEg5NmE4LDgsMCwwLDEsMC0xNmg2NEE4LDgsMCwwLDEsMTY4LDE2OFoiLz48L3N2Zz4=" width="24" height="24" alt=""> Example report</button>
 </div>
-
-<p id="scan-note" class="scan-note">Scans start only when you press Scan or Enter. DNS queries go to Cloudflare; the HTTPS check contacts your domain. Results stay in this page.</p>
-<noscript><p class="scan-note">JavaScript is needed to run checks. Read the methodology below to learn what the tool checks.</p></noscript>
-<div id="rp">
-  <div class="tbar">
-    <div>
-      <div class="tdomain" id="td">—</div>
-      <div class="tmeta" id="tm">READY</div>
-    </div>
-    <div class="tscore">
-      <div class="num" id="snum">—</div>
-      <div class="lbl">HEALTH SCORE</div>
-    </div>
-  </div>
-
-  <div class="pbar"><div class="pfill" id="pf" style="width:0"></div></div>
-  <div class="grid" id="grid"></div>
-  <div id="salesdiv" style="display:none" class="fw"></div>
-  <div class="log" id="log"></div>
-</div>
-
-<section class="methodology" id="methodology" aria-labelledby="method-title">
-<h2 id="method-title">What this domain checker examines</h2>
-<p>DMARC-able reads public DNS records through Cloudflare DNS-over-HTTPS. It does not send email, verify a mailbox, or change your DNS configuration.</p>
-<div class="method-grid"><section><h3>DMARC and SPF</h3><p>Review the published DMARC policy, reporting address and percentage, plus common SPF configuration signals. The checker does not evaluate message alignment or recursively resolve every SPF lookup.</p></section>
-<section><h3>DKIM and MX</h3><p>Look for DKIM keys at 15 common selectors and inspect mail exchanger records. An undiscovered selector does not prove that DKIM is absent; confirm selectors with your email provider.</p></section>
-<section><h3>HTTPS and the health score</h3><p>The optional HTTPS check is a browser connection probe. Browser restrictions can affect it; it does not inspect certificate expiry, chains or cipher suites. The score summarizes these checks and is not a security certification.</p></section>
-<section><h3>Using your results</h3><p>Confirm findings with your email provider before changing authentication policies. Report wording and suggested outreach are starting points for review, not proof that a domain is vulnerable or protected.</p></section></div>
-<p>Learn more: <a href="https://www.rfc-editor.org/rfc/rfc7489">DMARC</a>, <a href="https://www.rfc-editor.org/rfc/rfc7208">SPF</a>, and <a href="https://www.rfc-editor.org/rfc/rfc6376">DKIM</a>.</p>
+<div class="workbench">
+<nav class="rail" aria-label="Workspace steps"><button type="button" data-step="check" aria-current="step"><span class="step-number">1</span>Check</button><button type="button" data-step="understand"><span class="step-number">2</span>Understand</button><button type="button" data-step="share"><span class="step-number">3</span>Share</button></nav>
+<main class="workspace">
+<div class="columns"><section class="report" id="report" tabindex="-1" aria-labelledby="page-title">
+<div class="report-heading"><h1 id="page-title">Here’s where to start.</h1><p class="lede" id="lede">Understand your domain’s email setup, one check at a time.</p><p class="report-meta" id="report-meta">DMARC, SPF &amp; DKIM checks, with MX and HTTPS context.</p></div>
+<p id="scan-error" class="notice" role="alert" hidden></p><div id="loading" class="loading" role="status" hidden><span id="progress-label">Checking public records…</span><progress id="progress" max="5" value="0">Checking</progress></div>
+<div id="empty" class="empty"><h2>A domain. A clear next step.</h2><p>Enter the domain after the @ in your email address. We’ll look at its public records and explain what they tell us, what they don’t, and what to check next.</p><ol><li>Check the domain’s published setup.</li><li>Understand the finding before changing anything.</li><li>Keep your next steps or share an editable note.</li></ol><p>New to this? Try the example report first. It uses sample data and makes no network requests.</p></div>
+<div id="results" hidden><section id="finding" class="finding" aria-labelledby="finding-title"></section><details class="evidence"><summary><img class="icon " src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMTMuNjYsMTAxLjY2bC04MCw4MGE4LDgsMCwwLDEtMTEuMzIsMGwtODAtODBBOCw4LDAsMCwxLDUzLjY2LDkwLjM0TDEyOCwxNjQuNjlsNzQuMzQtNzQuMzVhOCw4LDAsMCwxLDExLjMyLDExLjMyWiIvPjwvc3ZnPg==" width="24" height="24" alt=""><strong>Raw DNS evidence</strong><span class="evidence-summary" id="evidence-summary"></span></summary><pre id="evidence"></pre></details><section class="other" aria-labelledby="other-title"><h2 id="other-title">The other checks</h2><div class="check-head" aria-hidden="true"><span>Check</span><span>Status</span><span>What it means</span></div><div id="checks"></div></section></div>
+<details class="scan-options"><summary>Choose what to check</summary><div class="options-body"><label><input type="checkbox" name="check" value="dmarc" checked>DMARC</label><label><input type="checkbox" name="check" value="spf" checked>SPF</label><label><input type="checkbox" name="check" value="dkim" checked>DKIM</label><label><input type="checkbox" name="check" value="https" checked>HTTPS</label><label><input type="checkbox" name="check" value="mx" checked>MX</label></div><p class="options-note">Checks run only when you choose Check domain. DNS queries go to Cloudflare’s public resolver; HTTPS checks contact the domain. No records are changed.</p></details>
 </section>
-</main>
-</div>
-<footer>DMARC-able · BROWSER-BASED CHECKS · NO API KEY<nav aria-label="Footer"><a href="/">Domain checker</a><a href="#methodology">Methodology</a><a href="https://github.com/wpimedia1/change-mechanism-6">Source code</a><a href="/.well-known/security.txt">Report a vulnerability</a></nav></footer>
-
+<aside class="composer" aria-labelledby="composer-title"><h2 id="composer-title">Your next steps</h2><fieldset class="formats"><legend class="sr-only">Draft format</legend><label class="choice"><input type="radio" name="format" value="email" checked><span id="email-label">Keep a note</span></label><label class="choice"><input type="radio" name="format" value="call">Call notes</label></fieldset><div id="recipient-field" hidden><label class="field-label" for="recipient">Recipient <span style="font-weight:400">(optional)</span></label><input class="recipient" id="recipient" placeholder="First name" maxlength="80" autocomplete="off"></div><label class="field-label" for="draft">Draft</label><textarea id="draft" class="draft" disabled placeholder="Your results will become a practical note here. Review it, make it yours, then copy it."></textarea><p class="draft-hint">Edit this to sound like you.</p><div class="draft-actions"><button class="text-button" id="reset-draft" type="button" disabled>Use suggested wording</button><span id="edit-status" class="message-status"></span></div><button class="primary" id="copy" type="button" disabled><img class="icon white" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMTYsMzJIODhhOCw4LDAsMCwwLTgsOFY4MEg0MGE4LDgsMCwwLDAtOCw4VjIxNmE4LDgsMCwwLDAsOCw4SDE2OGE4LDgsMCwwLDAsOC04VjE3Nmg0MGE4LDgsMCwwLDAsOC04VjQwQTgsOCwwLDAsMCwyMTYsMzJaTTE2MCwyMDhINDhWOTZIMTYwWm00OC00OEgxNzZWODhhOCw4LDAsMCwwLTgtOEg5NlY0OEgyMDhaIi8+PC9zdmc+" width="24" height="24" alt=""> Copy draft</button><p class="message-status" id="copy-status" role="status" aria-live="polite"></p></aside></div>
+<noscript><p class="notice">JavaScript is needed to check records and create a draft. You can still read how the checks work below. Nothing runs automatically.</p></noscript>
+<details class="methodology" id="methodology"><summary>How these checks work &amp; what they can’t tell you</summary><h2>Public records, explained in context</h2><p>DMARC-able reads public DNS records in your browser. Results are a snapshot, not a complete email security audit or a guarantee of delivery. A missing record does not prove that anyone has impersonated your domain.</p><div class="method-grid"><section><h3>DMARC and SPF</h3><p>We look for a DMARC TXT record at _dmarc.yourdomain and an SPF TXT record at the domain. We describe the published policy without validating every tag or following the complete SPF lookup tree. Subdomain policy inheritance is not evaluated. Confirm your sending services before changing either record.</p></section><section><h3>DKIM</h3><p>We try a small set of common DKIM selectors. Your provider may use another selector, so “Not confirmed” does not mean DKIM is missing. Check a recent sent message’s headers or your provider’s settings for the actual selector.</p></section><section><h3>HTTPS and MX</h3><p>HTTPS is a browser reachability check, not a certificate audit. Browser or network restrictions can prevent it. MX records identify published mail receivers; their presence does not confirm delivery, and their absence does not rule out SMTP fallback.</p></section><section><h3>Privacy and drafts</h3><p>No API key is required. Checks run only on request. Domains are sent to Cloudflare’s DNS resolver and, for HTTPS, the target website. Drafts are assembled locally from the findings. Recipient names and edited drafts stay in this page and are not saved after a reload.</p></section></div></details>
+<footer class="footer"><span>DMARC-able · A little clarity before the next change.</span><a href="#methodology">Methodology</a><a href="https://github.com/wpimedia1/change-mechanism-6">Open source</a><a href="https://github.com/wpimedia1/change-mechanism-6/security/policy">Security</a></footer>
+</main></div>
 <script>
-const DOH = 'https://cloudflare-dns.com/dns-query';
-let active = new Set(['dmarc','spf','dkim','ssl','mx']);
-let res = {};
-
-function tog(el){
-  const k = el.dataset.k;
-  if(active.has(k)){active.delete(k);el.classList.remove('on')}
-  else{active.add(k);el.classList.add('on')}
-  el.setAttribute('aria-pressed', String(active.has(k)));
+const ICONS={"shield-check":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMDgsNDBINDhBMTYsMTYsMCwwLDAsMzIsNTZ2NTZjMCw1Mi43MiwyNS41Miw4NC42Nyw0Ni45MywxMDIuMTksMjMuMDYsMTguODYsNDYsMjUuMjYsNDcsMjUuNTNhOCw4LDAsMCwwLDQuMiwwYzEtLjI3LDIzLjkxLTYuNjcsNDctMjUuNTNDMTk4LjQ4LDE5Ni42NywyMjQsMTY0LjcyLDIyNCwxMTJWNTZBMTYsMTYsMCwwLDAsMjA4LDQwWm0wLDcyYzAsMzcuMDctMTMuNjYsNjcuMTYtNDAuNiw4OS40MkExMjkuMywxMjkuMywwLDAsMSwxMjgsMjIzLjYyYTEyOC4yNSwxMjguMjUsMCwwLDEtMzguOTItMjEuODFDNjEuODIsMTc5LjUxLDQ4LDE0OS4zLDQ4LDExMmwwLTU2LDE2MCwwWk04Mi4zNCwxNDEuNjZhOCw4LDAsMCwxLDExLjMyLTExLjMyTDExMiwxNDguNjlsNTAuMzQtNTAuMzVhOCw4LDAsMCwxLDExLjMyLDExLjMybC01Niw1NmE4LDgsMCwwLDEtMTEuMzIsMFoiLz48L3N2Zz4=","magnifying-glass":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjkuNjYsMjE4LjM0bC01MC4wNy01MC4wNmE4OC4xMSw4OC4xMSwwLDEsMC0xMS4zMSwxMS4zMWw1MC4wNiw1MC4wN2E4LDgsMCwwLDAsMTEuMzItMTEuMzJaTTQwLDExMmE3Miw3MiwwLDEsMSw3Miw3MkE3Mi4wOCw3Mi4wOCwwLDAsMSw0MCwxMTJaIi8+PC9zdmc+","file-text":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMTMuNjYsODIuMzRsLTU2LTU2QTgsOCwwLDAsMCwxNTIsMjRINTZBMTYsMTYsMCwwLDAsNDAsNDBWMjE2YTE2LDE2LDAsMCwwLDE2LDE2SDIwMGExNiwxNiwwLDAsMCwxNi0xNlY4OEE4LDgsMCwwLDAsMjEzLjY2LDgyLjM0Wk0xNjAsNTEuMzEsMTg4LjY5LDgwSDE2MFpNMjAwLDIxNkg1NlY0MGg4OFY4OGE4LDgsMCwwLDAsOCw4aDQ4VjIxNlptLTMyLTgwYTgsOCwwLDAsMS04LDhIOTZhOCw4LDAsMCwxLDAtMTZoNjRBOCw4LDAsMCwxLDE2OCwxMzZabTAsMzJhOCw4LDAsMCwxLTgsOEg5NmE4LDgsMCwwLDEsMC0xNmg2NEE4LDgsMCwwLDEsMTY4LDE2OFoiLz48L3N2Zz4=","warning":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMzYuOCwxODguMDksMTQ5LjM1LDM2LjIyaDBhMjQuNzYsMjQuNzYsMCwwLDAtNDIuNywwTDE5LjIsMTg4LjA5YTIzLjUxLDIzLjUxLDAsMCwwLDAsMjMuNzJBMjQuMzUsMjQuMzUsMCwwLDAsNDAuNTUsMjI0aDE3NC45YTI0LjM1LDI0LjM1LDAsMCwwLDIxLjMzLTEyLjE5QTIzLjUxLDIzLjUxLDAsMCwwLDIzNi44LDE4OC4wOVpNMjIyLjkzLDIwMy44YTguNSw4LjUsMCwwLDEtNy40OCw0LjJINDAuNTVhOC41LDguNSwwLDAsMS03LjQ4LTQuMiw3LjU5LDcuNTksMCwwLDEsMC03LjcyTDEyMC41Miw0NC4yMWE4Ljc1LDguNzUsMCwwLDEsMTUsMGw4Ny40NSwxNTEuODdBNy41OSw3LjU5LDAsMCwxLDIyMi45MywyMDMuOFpNMTIwLDE0NFYxMDRhOCw4LDAsMCwxLDE2LDB2NDBhOCw4LDAsMCwxLTE2LDBabTIwLDM2YTEyLDEyLDAsMSwxLTEyLTEyQTEyLDEyLDAsMCwxLDE0MCwxODBaIi8+PC9zdmc+","caret-down":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMTMuNjYsMTAxLjY2bC04MCw4MGE4LDgsMCwwLDEtMTEuMzIsMGwtODAtODBBOCw4LDAsMCwxLDUzLjY2LDkwLjM0TDEyOCwxNjQuNjlsNzQuMzQtNzQuMzVhOCw4LDAsMCwxLDExLjMyLDExLjMyWiIvPjwvc3ZnPg==","envelope-simple":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjQsNDhIMzJhOCw4LDAsMCwwLTgsOFYxOTJhMTYsMTYsMCwwLDAsMTYsMTZIMjE2YTE2LDE2LDAsMCwwLDE2LTE2VjU2QTgsOCwwLDAsMCwyMjQsNDhaTTIwMy40Myw2NCwxMjgsMTMzLjE1LDUyLjU3LDY0Wk0yMTYsMTkySDQwVjc0LjE5bDgyLjU5LDc1LjcxYTgsOCwwLDAsMCwxMC44MiwwTDIxNiw3NC4xOVYxOTJaIi8+PC9zdmc+","key":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMTYuNTcsMzkuNDNBODAsODAsMCwwLDAsODMuOTEsMTIwLjc4TDI4LjY5LDE3NkExNS44NiwxNS44NiwwLDAsMCwyNCwxODcuMzFWMjE2YTE2LDE2LDAsMCwwLDE2LDE2SDcyYTgsOCwwLDAsMCw4LThWMjA4SDk2YTgsOCwwLDAsMCw4LThWMTg0aDE2YTgsOCwwLDAsMCw1LjY2LTIuMzRsOS41Ni05LjU3QTc5LjczLDc5LjczLDAsMCwwLDE2MCwxNzZoLjFBODAsODAsMCwwLDAsMjE2LjU3LDM5LjQzWk0yMjQsOTguMWMtMS4wOSwzNC4wOS0yOS43NSw2MS44Ni02My44OSw2MS45SDE2MGE2My43LDYzLjcsMCwwLDEtMjMuNjUtNC41MSw4LDgsMCwwLDAtOC44NCwxLjY4TDExNi42OSwxNjhIOTZhOCw4LDAsMCwwLTgsOHYxNkg3MmE4LDgsMCwwLDAtOCw4djE2SDQwVjE4Ny4zMWw1OC44My01OC44MmE4LDgsMCwwLDAsMS42OC04Ljg0QTYzLjcyLDYzLjcyLDAsMCwxLDk2LDk1LjkyYzAtMzQuMTQsMjcuODEtNjIuOCw2MS45LTYzLjg5QTY0LDY0LDAsMCwxLDIyNCw5OC4xWk0xOTIsNzZhMTIsMTIsMCwxLDEtMTItMTJBMTIsMTIsMCwwLDEsMTkyLDc2WiIvPjwvc3ZnPg==","lock-key":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0xMjgsMTEyYTI4LDI4LDAsMCwwLTgsNTQuODNWMTg0YTgsOCwwLDAsMCwxNiwwVjE2Ni44M0EyOCwyOCwwLDAsMCwxMjgsMTEyWm0wLDQwYTEyLDEyLDAsMSwxLDEyLTEyQTEyLDEyLDAsMCwxLDEyOCwxNTJabTgwLTcySDE3NlY1NmE0OCw0OCwwLDAsMC05NiwwVjgwSDQ4QTE2LDE2LDAsMCwwLDMyLDk2VjIwOGExNiwxNiwwLDAsMCwxNiwxNkgyMDhhMTYsMTYsMCwwLDAsMTYtMTZWOTZBMTYsMTYsMCwwLDAsMjA4LDgwWk05Niw1NmEzMiwzMiwwLDAsMSw2NCwwVjgwSDk2Wk0yMDgsMjA4SDQ4Vjk2SDIwOFYyMDhaIi8+PC9zdmc+","hard-drives":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMDgsMTM2SDQ4YTE2LDE2LDAsMCwwLTE2LDE2djQ4YTE2LDE2LDAsMCwwLDE2LDE2SDIwOGExNiwxNiwwLDAsMCwxNi0xNlYxNTJBMTYsMTYsMCwwLDAsMjA4LDEzNlptMCw2NEg0OFYxNTJIMjA4djQ4Wm0wLTE2MEg0OEExNiwxNiwwLDAsMCwzMiw1NnY0OGExNiwxNiwwLDAsMCwxNiwxNkgyMDhhMTYsMTYsMCwwLDAsMTYtMTZWNTZBMTYsMTYsMCwwLDAsMjA4LDQwWm0wLDY0SDQ4VjU2SDIwOHY0OFpNMTkyLDgwYTEyLDEyLDAsMSwxLTEyLTEyQTEyLDEyLDAsMCwxLDE5Miw4MFptMCw5NmExMiwxMiwwLDEsMS0xMi0xMkExMiwxMiwwLDAsMSwxOTIsMTc2WiIvPjwvc3ZnPg==","check":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMjkuNjYsNzcuNjZsLTEyOCwxMjhhOCw4LDAsMCwxLTExLjMyLDBsLTU2LTU2YTgsOCwwLDAsMSwxMS4zMi0xMS4zMkw5NiwxODguNjksMjE4LjM0LDY2LjM0YTgsOCwwLDAsMSwxMS4zMiwxMS4zMloiLz48L3N2Zz4=","copy":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yMTYsMzJIODhhOCw4LDAsMCwwLTgsOFY4MEg0MGE4LDgsMCwwLDAtOCw4VjIxNmE4LDgsMCwwLDAsOCw4SDE2OGE4LDgsMCwwLDAsOC04VjE3Nmg0MGE4LDgsMCwwLDAsOC04VjQwQTgsOCwwLDAsMCwyMTYsMzJaTTE2MCwyMDhINDhWOTZIMTYwWm00OC00OEgxNzZWODhhOCw4LDAsMCwwLTgtOEg5NlY0OEgyMDhaIi8+PC9zdmc+","arrow-clockwise":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBmaWxsPSJjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik0yNDAsNTZ2NDhhOCw4LDAsMCwxLTgsOEgxODRhOCw4LDAsMCwxLDAtMTZIMjExLjRMMTg0LjgxLDcxLjY0bC0uMjUtLjI0YTgwLDgwLDAsMSwwLTEuNjcsMTE0Ljc4LDgsOCwwLDAsMSwxMSwxMS42M0E5NS40NCw5NS40NCwwLDAsMSwxMjgsMjI0aC0xLjMyQTk2LDk2LDAsMSwxLDE5NS43NSw2MEwyMjQsODUuOFY1NmE4LDgsMCwxLDEsMTYsMFoiLz48L3N2Zz4="};
+const $=id=>document.getElementById(id);
+const names={dmarc:'DMARC',spf:'SPF',dkim:'DKIM',https:'HTTPS',mx:'MX'};
+const symbols={dmarc:'shield-check',spf:'envelope-simple',dkim:'key',https:'lock-key',mx:'hard-drives'};
+const selectors=['default','google','selector1','selector2','k1','k2','s1','s2','smtp','mail','dkim','mandrill','everlytickey1','everlytickey2','sendgrid'];
+const state={domain:'',results:[],example:false,busy:false,drafts:new Map()};
+function esc(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function icon(name,color='blue'){return '<img class="icon '+color+'" src="'+ICONS[name]+'" width="24" height="24" alt="">';}
+function domainName(value){
+  const raw=String(value).trim();
+  if(!raw||/\s|@/.test(raw))throw Error('Enter a public domain, such as example.com.');
+  const authority=raw.replace(/^https?:\/\//i,'').split(/[/?#]/)[0];
+  if(authority.includes(':'))throw Error('Enter a public domain without a port or IP address.');
+  let url;try{url=new URL(/^https?:\/\//i.test(raw)?raw:'https://'+raw);}catch{throw Error('Enter a public domain, such as example.com.');}
+  const host=url.hostname.toLowerCase().replace(/\.$/,'');
+  if(!/^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z][a-z0-9-]{1,62}$/.test(host)||/\.(localhost|local|internal|test|invalid)$/.test(host))throw Error('Enter a public domain, such as example.com.');
+  return host;
 }
-
-async function doh(name, type){
+async function dns(name,type){
   try{
-    const r = await fetch(`${DOH}?name=${encodeURIComponent(name)}&type=${type}`,{headers:{'Accept':'application/dns-json'}});
-    return await r.json();
-  }catch(e){return null}
+    const response=await fetch('https://cloudflare-dns.com/dns-query?name='+encodeURIComponent(name)+'&type='+type,{headers:{Accept:'application/dns-json'},signal:AbortSignal.timeout(7000)});
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const data=await response.json();
+    if(data.Status!==0&&data.Status!==3)throw Error('Resolver status '+data.Status);
+    return {ok:true,records:(data.Answer||[]).filter(a=>a.type==={TXT:16,MX:15}[type]).map(a=>String(a.data).replace(/"\s*"/g,'').replace(/^"|"$/g,'')),name};
+  }catch{return {ok:false,records:[],name};}
 }
-
-function ts(){
-  const n=new Date();
-  return [n.getHours(),n.getMinutes(),n.getSeconds()].map(x=>String(x).padStart(2,'0')).join(':')+'.'+String(n.getMilliseconds()).padStart(3,'0');
+function result(key,status,label,title,found,why,next,evidence){return {key,status,label,title,found,why,next,evidence};}
+function unknown(key,evidence){return result(key,'unknown','Not confirmed',names[key]+' needs a closer look','We couldn’t complete this check.','A failed lookup tells us about this attempt, not whether the domain is configured correctly.','Try again, or check the record with your email provider.',evidence);}
+function dmarcResult(records,domain){
+  const matches=records.filter(r=>/^v=DMARC1(?:;|\s|$)/i.test(r));
+  const evidence='_dmarc.'+domain+' · TXT\n'+(records.join('\n')||'No TXT answer returned.');
+  if(!matches.length)return result('dmarc','review','Not found','No DMARC record found','We didn’t find a DMARC record at _dmarc.'+domain+'.','DMARC lets a domain publish how receivers should handle mail that fails authentication alignment. This check does not evaluate inherited policies.','List the services that send email for this domain. Then review a monitoring policy with your email provider.',evidence);
+  if(matches.length>1)return result('dmarc','review','Review records','More than one DMARC record','We found multiple DMARC records at this name.','Multiple policy records can prevent receivers from applying DMARC.','Review the records with whoever manages DNS before consolidating them.',evidence);
+  const policy=matches[0].match(/(?:^|;)\s*p\s*=\s*(none|quarantine|reject)\s*(?:;|$)/i)?.[1]?.toLowerCase();
+  if(!policy)return result('dmarc','review','Review policy','Review the DMARC policy','A DMARC record exists, but we couldn’t identify a supported p= policy.','An incomplete or invalid policy may not be applied by receivers.','Check the full record with your provider. This tool does not validate every DMARC tag.',evidence);
+  return result('dmarc',policy==='none'?'review':'good',policy==='none'?'Monitoring':'Policy found',policy==='none'?'DMARC is in monitoring mode':'A DMARC policy is published','The published policy is p='+policy+'.',policy==='none'?'The policy asks receivers to take no specific delivery action on failures. Monitoring can be a useful first step.':'The policy requests '+(policy==='reject'?'rejection':'quarantine')+' for mail that fails DMARC. Receivers may apply their own rules.','Review authentication reports and legitimate senders before changing the policy.',evidence);
 }
-
-function log(msg,cls=''){
-  const t=document.getElementById('log');
-  const r=document.createElement('div');
-  r.className='le';
-  r.innerHTML=`<span class="lt">${ts()}</span><span class="lm ${cls}">${esc(msg)}</span>`;
-  t.appendChild(r);t.scrollTop=t.scrollHeight;
-}
-
-function prog(p){document.getElementById('pf').style.width=p+'%'}
-
-function esc(s){
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function mkSkel(id,title,icon){
-  const d=document.createElement('div');
-  d.id=id;d.className='card';
-  d.innerHTML=`<div class="ch"><span class="cico">${icon}</span><span class="cname">${title}</span><span class="cbadge bsc pulse">SCANNING</span></div>
-  <div class="cb"><div class="shim" style="margin-bottom:7px;width:95%"></div><div class="shim" style="margin-bottom:7px;width:75%"></div><div class="shim" style="width:55%"></div></div>`;
-  return d;
-}
-
-function render(id,title,icon,r){
-  const el=document.getElementById(id);
-  el.className='card '+r.status;
-  const bmap={pass:'bp',fail:'bf',warn:'bw',skip:'bs'};
-  let recHtml='';
-  if(r.record) recHtml=`<div class="rec"><span class="g">${esc(r.record)}</span></div>`;
-  if(r.found?.length) recHtml=r.found.map(f=>`<div class="rec"><span class="g">${esc(f.sel)}._domainkey</span>\n${esc((f.rec||'').substring(0,100))}${f.rec?.length>100?'…':''}</div>`).join('');
-  if(r.mxlist?.length) recHtml=`<div class="rec">${r.mxlist.map(x=>`<span class="g">${esc(x)}</span>`).join('\n')}</div>`;
-  if(r.https) recHtml=`<div class="rec"><span class="g">PORT 443 → REACHABLE</span>\nTTFB: ${r.ttfb}ms</div>`;
-  const aHtml=(r.analysis||[]).map(a=>{
-    const t=typeof a==='string'?'ok':a.t;
-    const m=typeof a==='string'?a:a.m;
-    return `<li class="${t==='ok'?'ok':t==='bad'?'bad':'w'}">${esc(m)}</li>`;
-  }).join('');
-  el.innerHTML=`<div class="ch"><span class="cico">${icon}</span><span class="cname">${title}</span><span class="cbadge ${bmap[r.status]||'bs'}">${r.status.toUpperCase()}</span></div>
-  <div class="cb">${recHtml}<ul class="alist">${aHtml}</ul>${r.note?`<div class="cnote">${esc(r.note)}</div>`:''}</div>`;
-}
-
-/* ───── CHECKS ───── */
-
-async function chkDMARC(domain){
-  log(`Querying _dmarc.${domain} TXT`,'b');
-  const data=await doh(`_dmarc.${domain}`,'TXT');
-  const recs=(data?.Answer||[]).map(r=>r.data?.replace(/"/g,'')).filter(r=>r?.startsWith('v=DMARC1'));
-  if(!recs.length){
-    log('DMARC: MISSING','r');
-    return{status:'fail',record:null,issues:['MISSING'],analysis:[{t:'bad',m:'No DMARC record — anyone can spoof email from this domain'}]};
+async function check(key,domain){
+  if(key==='https'){
+    try{await fetch('https://'+domain+'/',{method:'HEAD',mode:'no-cors',credentials:'omit',cache:'no-store',signal:AbortSignal.timeout(7000)});return result(key,'good','Reached','HTTPS was reachable','The browser completed an HTTPS request.','This confirms reachability from this browser, not certificate quality or email security.','Use a dedicated TLS check if you need certificate details.','HTTPS HEAD · '+domain+' · browser request completed; response contents are not inspected.');}catch{return unknown(key,'HTTPS request did not complete. Browser or network restrictions may be responsible.');}
   }
-  const rec=recs[0];
-  const policy=rec.match(/p=(\w+)/)?.[1];
-  const pct=parseInt(rec.match(/pct=(\d+)/)?.[1]||'100');
-  const rua=rec.match(/rua=([^;\s]+)/)?.[1];
-  const issues=[];const analysis=[];
-  if(policy==='none'){issues.push('POLICY_NONE');analysis.push({t:'w',m:`Policy is 'none' — monitoring only, zero enforcement. Spoofing still works.`})}
-  else if(policy==='quarantine'){analysis.push({t:'w',m:`Policy is 'quarantine' — spoofed mail goes to spam (not rejected)`})}
-  else if(policy==='reject'){analysis.push({t:'ok',m:`Policy is 'reject' — spoofed email is hard-blocked`})}
-  else{issues.push('NO_POLICY');analysis.push({t:'bad',m:'No p= tag found — DMARC record is malformed'})}
-  if(pct<100){issues.push('PCT_LOW');analysis.push({t:'w',m:`pct=${pct} — policy only applies to ${pct}% of messages`})}
-  else analysis.push({t:'ok',m:'100% of messages subject to policy'});
-  if(!rua){issues.push('NO_RUA');analysis.push({t:'bad',m:'No rua= tag — you get zero visibility into spoofing attempts'})}
-  else analysis.push({t:'ok',m:`Aggregate reports → ${rua}`});
-  const status=!policy?'fail':policy==='reject'&&pct===100&&rua?'pass':'warn';
-  log(`DMARC: ${status.toUpperCase()} — p=${policy||'?'} pct=${pct}`,status==='pass'?'g':status==='fail'?'r':'a');
-  return{status,record:rec,issues,analysis,policy,pct,rua};
-}
-
-async function chkSPF(domain){
-  log(`Querying SPF TXT for ${domain}`,'b');
-  const data=await doh(domain,'TXT');
-  const recs=(data?.Answer||[]).map(r=>r.data?.replace(/"/g,'')).filter(r=>r?.startsWith('v=spf1'));
-  if(!recs.length){
-    log('SPF: MISSING','r');
-    return{status:'fail',record:null,issues:['MISSING'],analysis:[{t:'bad',m:'No SPF record — any server can send mail claiming to be this domain'}]};
+  if(key==='dkim'){
+    const answers=await Promise.all(selectors.map(s=>dns(s+'._domainkey.'+domain,'TXT')));
+    const found=answers.filter(a=>a.ok&&a.records.some(r=>/(?:^|;)\s*p\s*=\s*[^;\s]+/i.test(r)));
+    const evidence=answers.map(a=>a.name+': '+(!a.ok?'lookup unavailable':a.records.join(' | ')||'no TXT answer')).join('\n');
+    return found.length?result(key,'good','Key found','A DKIM key is published','We found a public key at '+found.length+' common selector'+(found.length===1?'':'s')+'.','A key in DNS does not prove that outgoing messages are signed or pass verification.','Check DKIM results in a recent sent message’s Authentication-Results header.',evidence):result(key,'unknown','Not confirmed','DKIM needs a closer look','No usable key was confirmed at the common selectors we tried.','Your provider may use a different selector. This is not proof that DKIM is missing.','Find the selector in a sent message’s DKIM-Signature header or your email provider’s settings.',evidence);
   }
-  if(recs.length>1){
-    log('SPF: FAIL — multiple records (RFC violation)','r');
-    return{status:'fail',record:recs.join(' | '),issues:['MULTIPLE'],analysis:[{t:'bad',m:'Multiple SPF records — RFC 7208 violation, causes unpredictable failures'}]};
-  }
-  const rec=recs[0];const issues=[];const analysis=[];
-  const all=rec.match(/([~+\-?])all/)?.[1];
-  if(all==='-'){analysis.push({t:'ok',m:'Hard fail (-all) — unauthorized senders rejected'})}
-  else if(all==='~'){issues.push('SOFT_FAIL');analysis.push({t:'w',m:'Soft fail (~all) — unauthorized senders only marked, not blocked'})}
-  else if(all==='+'){issues.push('PASS_ALL');analysis.push({t:'bad',m:'+all is catastrophic — every server on the internet is authorized'})}
-  else if(all==='?'){issues.push('NEUTRAL');analysis.push({t:'w',m:'Neutral (?all) — no meaningful protection'})}
-  else{issues.push('NO_ALL');analysis.push({t:'bad',m:'No all mechanism — SPF enforcement undefined'})}
-  const includes=(rec.match(/include:[^\s]+/g)||[]);
-  if(includes.length)analysis.push({t:'ok',m:`${includes.length} include(s): ${includes.join(', ')}`});
-  const lookups=(rec.match(/\b(include|a|mx|ptr|exists):/g)||[]).length;
-  if(lookups>9){issues.push('LOOKUP_LIMIT');analysis.push({t:'bad',m:`${lookups} DNS lookups — exceeds RFC 7208 limit of 10, causing PermError`})}
-  else if(lookups>7)analysis.push({t:'w',m:`${lookups} DNS lookups — approaching the 10-lookup limit`});
-  const status=issues.includes('PASS_ALL')||issues.includes('MULTIPLE')?'fail':all==='-'&&!issues.length?'pass':'warn';
-  log(`SPF: ${status.toUpperCase()} — ${all||'no-all'}all`,status==='pass'?'g':status==='fail'?'r':'a');
-  return{status,record:rec,issues,analysis};
+  const answer=await dns((key==='dmarc'?'_dmarc.':'')+domain,key==='mx'?'MX':'TXT');
+  if(!answer.ok)return unknown(key,answer.name+' · DNS lookup unavailable');
+  if(key==='dmarc')return dmarcResult(answer.records,domain);
+  const evidence=answer.name+' · '+(key==='mx'?'MX':'TXT')+'\n'+(answer.records.join('\n')||'No answer returned.');
+  if(key==='mx')return answer.records.length?result(key,'good','Record found','MX records are published','The domain publishes '+answer.records.length+' MX record'+(answer.records.length===1?'':'s')+'.','MX records describe where incoming email should go. A null MX (0 .) explicitly indicates no email service.','Confirm the listed receivers match the intended email provider; records alone do not prove delivery.',evidence):result(key,'review','Not found','No MX record found','No explicit MX answer was returned.','This does not rule out SMTP fallback or mean the domain should receive email.','If this domain receives email, confirm its receiving setup with the provider.',evidence);
+  const spf=answer.records.filter(r=>/^v=spf1(?:\s|$)/i.test(r));
+  if(!spf.length)return result(key,'review','Not found','No SPF record found','We didn’t find an SPF record at this domain.','SPF lists permitted senders for the envelope sender domain. Some services send using a different domain.','Identify your sending services and ask each provider which SPF settings apply.',evidence);
+  if(spf.length>1||/(?:^|\s)\+?all(?:\s|$)/i.test(spf[0]))return result(key,'review','Review record','Review the SPF record',spf.length>1?'More than one SPF record was returned.':'The SPF record includes a mechanism that permits any sender.','This deserves a closer look before you rely on the published setup.','Review it with your DNS administrator. Keep a list of legitimate sending services before editing.',evidence);
+  return result(key,'good','Record found','An SPF record is published','We found one SPF record.','Presence alone does not confirm correct authorization. We do not resolve the full SPF lookup tree.','Compare the record with the services you use to send email.',evidence);
 }
-
-async function chkDKIM(domain){
-  log(`Probing DKIM selectors for ${domain}`,'b');
-  const sels=['default','google','mail','selector1','selector2','k1','k2','s1','s2','dkim','smtp','em','mimecast','mandrill','amazonses'];
-  const found=[];
-  await Promise.all(sels.map(async sel=>{
-    const data=await doh(`${sel}._domainkey.${domain}`,'TXT');
-    const recs=(data?.Answer||[]).filter(r=>r.data?.includes('v=DKIM1')||r.data?.match(/p=[A-Za-z0-9+/=]{20,}/));
-    if(recs.length)found.push({sel,rec:recs[0].data?.replace(/"/g,'')});
-  }));
-  if(!found.length){
-    log('DKIM: FAIL — no selectors found','r');
-    return{status:'fail',found:[],issues:['NO_SELECTORS'],analysis:[{t:'bad',m:`None of ${sels.length} common selectors responded — DKIM not configured or using custom selectors`}]};
-  }
-  const analysis=[{t:'ok',m:`${found.length} selector(s) active: ${found.map(f=>f.sel).join(', ')}`}];
-  found.forEach(f=>{
-    const key=f.rec?.match(/p=([A-Za-z0-9+/=]+)/)?.[1]||'';
-    if(key.length<80)analysis.push({t:'w',m:`Selector '${f.sel}' may use a weak/short key`});
-    else analysis.push({t:'ok',m:`Selector '${f.sel}' — valid public key present`});
-  });
-  log(`DKIM: PASS — ${found.map(f=>f.sel).join(', ')}`,'g');
-  return{status:'pass',found,issues:[],analysis};
+function primaryFinding(){return state.results.find(r=>r.status==='review')||state.results.find(r=>r.status==='unknown')||state.results[0];}
+function currentAudience(){return document.querySelector('input[name="audience"]:checked').value;}
+function currentFormat(){return document.querySelector('input[name="format"]:checked').value;}
+function makeDraft(finding,domain,audience,format,recipient='',example=false){
+  const prefix=example?'[Example report — sample data]\n\n':'';
+  const greeting=recipient.trim()?'Hi '+recipient.trim()+',':'Hi,';
+  if(audience==='own')return prefix+(format==='call'?'Questions for my email provider about '+domain:'My next step for '+domain)+'\n\n'+finding.found+'\n\n'+finding.next+'\n\n'+(format==='call'?'Ask: Does this match the way my email is set up? What should I verify before making a change?':'Before making a change: confirm who manages DNS and which services send email. Keep a copy of the current records.')+'\n\nContext: '+finding.why;
+  if(format==='call')return prefix+'About '+domain+'\n\nStart with: “I took a look at the public email setup for your domain. Is now a good time to compare it with what you use?”\n\nWhat I found: '+finding.found+'\n\nExplain: '+finding.why+'\n\nSuggest: '+finding.next+'\n\nAsk: “Who looks after your email and DNS? We can check with them before changing anything.”';
+  let question='Could we compare this with your email provider’s settings before making any changes?';
+  if(finding.key==='dmarc'&&finding.label==='Not found')question='Could you confirm which tools you use to send email? That will help us work out the next step without interrupting your existing setup.';
+  else if(finding.status==='unknown')question='This check couldn’t give a definite answer. Could whoever manages your email help confirm the setup? I wouldn’t change anything based on this result alone.';
+  else if(finding.key==='dmarc'&&finding.label==='Monitoring')question='Do you know whether someone is reviewing the DMARC reports? They can help us see which senders are working before deciding whether to change the policy.';
+  else if(finding.key==='spf')question='Could you share which services send email for this domain? We can compare that list with the SPF setup before suggesting a change.';
+  return prefix+greeting+'\n\nI checked the public records for '+domain+'. '+finding.found+'\n\n'+question+'\n\nHappy to compare notes with whoever looks after your email.';
 }
-
-async function chkSSL(domain){
-  log(`Probing HTTPS port 443 for ${domain}`,'b');
+function draftKey(){return currentAudience()+':'+currentFormat();}
+function renderDraft(force=false){
+  const helping=currentAudience()==='help';
+  $('composer-title').textContent=helping?'Explain it to someone':'Your next steps';$('email-label').textContent=helping?'Short email':'Keep a note';$('recipient-field').hidden=!helping;
+  if(!state.results.length)return;
+  const key=draftKey();let saved=state.drafts.get(key);
+  if(force||!saved||!saved.edited){saved={text:makeDraft(primaryFinding(),state.domain,currentAudience(),currentFormat(),$('recipient').value,state.example),edited:false};state.drafts.set(key,saved);}
+  $('draft').value=saved.text;$('edit-status').textContent=saved.edited?'Your edited draft':'Suggested wording';$('copy-status').textContent='';
+}
+function step(name){document.querySelectorAll('[data-step]').forEach(b=>{if(b.dataset.step===name)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});}
+function render(){
+  const finding=primaryFinding();$('empty').hidden=true;$('results').hidden=false;
+  $('lede').textContent=finding.status==='good'?'A useful starting point. Confirm the details with your provider.':'One thing to review before changing your email setup.';
+  $('report-meta').textContent=(state.example?'EXAMPLE REPORT · ':'Checked public records · ')+state.domain+(state.example?' · Sample data, not a live scan':' · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));
+  $('finding').className='finding '+finding.status;
+  $('finding').innerHTML='<h2 id="finding-title">'+icon(finding.status==='good'?'check':finding.status==='review'?'warning':'magnifying-glass','')+esc(finding.title)+'</h2><div class="explanation">'+[['What we found',finding.found],['Why it matters',finding.why],['First step',finding.next]].map(([label,value])=>'<div><h3>'+label+'</h3><p>'+esc(value)+'</p></div>').join('')+'</div>';
+  $('evidence-summary').textContent=finding.evidence.split('\n')[0];$('evidence').textContent=finding.evidence;
+  $('checks').innerHTML=state.results.filter(r=>r!==finding).map(r=>'<div class="check-row"><span class="check-name">'+icon(symbols[r.key])+names[r.key]+'</span><span class="status '+r.status+'">'+icon(r.status==='good'?'check':'magnifying-glass','')+esc(r.label)+'</span><div><p>'+esc(r.found)+' '+esc(r.why)+'</p><details class="check-evidence"><summary>'+names[r.key]+' evidence &amp; next step</summary><p>'+esc(r.next)+'</p><pre>'+esc(r.evidence)+'</pre></details></div></div>').join('')||'<p>Only one check was selected. You can choose more below.</p>';
+  ['draft','copy','reset-draft'].forEach(id=>$(id).disabled=false);renderDraft();step('understand');
+}
+function exampleReport(){
+  if(state.busy)return;state.domain='example.com';state.example=true;state.drafts.clear();$('domain').value=state.domain;$('scan-error').hidden=true;
+  state.results=[dmarcResult([],state.domain),result('spf','good','Record found','','An SPF record lists permitted senders.','It still needs to match the services in use.','Confirm the sending services with the provider.','Sample only: v=spf1 include:mail.example.com ~all'),result('dkim','unknown','Not confirmed','','We couldn’t confirm a DKIM key from common selectors.','This does not mean DKIM is missing.','Check your provider’s selector.','Sample only: common selectors had no confirmed key.'),result('https','good','Reached','','The site was reachable over HTTPS.','This is not a certificate audit.','Use a TLS checker for certificate details.','Sample only: HTTPS request completed.'),result('mx','good','Record found','','Mail receiver records are published.','Records alone do not confirm delivery.','Confirm the expected provider.','Sample only: 10 mail.example.com')];
+  render();
+}
+async function scan(event){
+  event?.preventDefault();if(state.busy)return;
+  let domain;try{domain=domainName($('domain').value);}catch(error){$('scan-error').textContent=error.message;$('scan-error').hidden=false;$('domain').focus();return;}
+  const keys=[...document.querySelectorAll('input[name="check"]:checked')].map(e=>e.value);
+  if(!keys.length){$('scan-error').textContent='Choose at least one check below.';$('scan-error').hidden=false;return;}
+  state.busy=true;$('scan-button').disabled=true;$('example').disabled=true;$('scan-error').hidden=true;$('loading').hidden=false;$('progress').value=0;$('progress').max=keys.length;
+  $('results').hidden=true;$('empty').hidden=true;['draft','copy','reset-draft'].forEach(id=>$(id).disabled=true);$('report').setAttribute('aria-busy','true');
   try{
-    const t0=Date.now();
-    await fetch(`https://${domain}`,{method:'HEAD',mode:'no-cors',signal:AbortSignal.timeout(7000)});
-    const ttfb=Date.now()-t0;
-    log(`SSL: Reachable in ${ttfb}ms`,'g');
-    return{
-      status:'pass',https:true,ttfb,
-      analysis:[
-        {t:'ok',m:`Port 443 responds — HTTPS is active`},
-        {t:'ok',m:`TLS handshake completed in ~${ttfb}ms`},
-        {t:'w',m:'Certificate details (expiry, chain, ciphers) require CLI: openssl s_client -connect '+domain+':443 -showcerts'}
-      ],
-      note:'The ! beside certificate details is informational, not an error or vulnerability warning. The HTTPS probe succeeded, but this scanner does not inspect certificate expiry, the intermediate chain, or supported ciphers. This notice does not change the PASS result. Run the command above in a terminal with OpenSSL to inspect the server-sent certificates and negotiated cipher; it does not enumerate every supported cipher or establish a verified chain.'
-    };
-  }catch(e){
-    if(e.name==='AbortError'){
-      log('SSL: TIMEOUT on port 443','r');
-      return{status:'fail',https:false,issues:['TIMEOUT'],analysis:[{t:'bad',m:'Connection to port 443 timed out — HTTPS may not be configured'}]};
-    }
-    log(`SSL: Network/CORS — ${e.message}`,'a');
-    return{
-      status:'warn',https:null,
-      analysis:[
-        {t:'w',m:'Browser CORS policy blocked the probe — not a definitive result'},
-        {t:'w',m:'Verify manually: curl -I https://'+domain}
-      ],
-      note:'Open domain in browser — if it loads over https:// SSL is configured. For full audit use: ssllabs.com/ssltest'
-    };
-  }
+    let completed=0;const results=await Promise.all(keys.map(async key=>{const value=await check(key,domain);$('progress').value=++completed;$('progress-label').textContent='Checked '+completed+' of '+keys.length+' · '+names[key];return value;}));
+    state.domain=domain;state.example=false;state.results=results;state.drafts.clear();render();$('report').focus();
+  }catch{$('scan-error').textContent='The check couldn’t finish. Please try again.';$('scan-error').hidden=false;if(state.results.length)render();else $('empty').hidden=false;}
+  finally{state.busy=false;$('scan-button').disabled=false;$('example').disabled=false;$('loading').hidden=true;$('report').removeAttribute('aria-busy');}
 }
+$('scan-form').addEventListener('submit',scan);
+$('example').addEventListener('click',exampleReport);
+document.querySelectorAll('input[name="audience"],input[name="format"]').forEach(input=>input.addEventListener('change',()=>renderDraft()));
+$('recipient').addEventListener('input',()=>renderDraft());
+$('draft').addEventListener('input',()=>{state.drafts.set(draftKey(),{text:$('draft').value,edited:true});$('edit-status').textContent='Your edited draft';$('copy-status').textContent='';});
+$('reset-draft').addEventListener('click',()=>renderDraft(true));
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('draft').value);$('copy-status').textContent='Copied. Ready to paste wherever you need it.';}catch{$('draft').focus();$('draft').select();$('copy-status').textContent='Select and copy the draft with Ctrl+C or Command+C.';}});
+document.querySelectorAll('[data-step]').forEach(button=>button.addEventListener('click',()=>{const name=button.dataset.step;step(name);$(name==='check'?'domain':name==='share'&&state.results.length?'draft':'report').focus();}));
 
-async function chkMX(domain){
-  log(`Querying MX records for ${domain}`,'b');
-  const data=await doh(domain,'MX');
-  const recs=(data?.Answer||[]).filter(r=>r.type===15).map(r=>r.data).sort();
-  if(!recs.length){
-    log('MX: FAIL — no mail exchangers','r');
-    return{status:'fail',mxlist:[],analysis:[{t:'bad',m:'No MX records — this domain cannot receive email'}]};
-  }
-  const analysis=[{t:'ok',m:`${recs.length} mail exchanger(s) found`}];
-  const providers={google:'Google Workspace',outlook:'Microsoft 365 / Exchange',amazonses:'Amazon SES',mailgun:'Mailgun',sendgrid:'SendGrid',protonmail:'Proton Mail',zoho:'Zoho Mail',yahoo:'Yahoo Mail',mimecast:'Mimecast',barracuda:'Barracuda'};
-  const det=Object.entries(providers).find(([k])=>recs.some(r=>r.toLowerCase().includes(k)));
-  if(det)analysis.push({t:'ok',m:`Provider detected: ${det[1]}`});
-  if(recs.length===1)analysis.push({t:'w',m:'Single MX — no fallback if primary goes down'});
-  else analysis.push({t:'ok',m:`${recs.length} MX records provide redundancy`});
-  log(`MX: PASS — ${recs.length} exchanger(s)${det?', '+det[1]:''}`,'g');
-  return{status:'pass',mxlist:recs,analysis,provider:det?.[1]};
-}
-
-/* ───── SCORE ───── */
-function score(results){
-  let bad=0,tot=0;
-  Object.values(results).forEach(r=>{
-    if(!r||r.status==='skip')return;
-    tot++;
-    if(r.status==='fail')bad+=2;
-    else if(r.status==='warn')bad+=1;
-  });
-  if(!tot)return{s:'—',c:''};
-  const s=Math.round((1-bad/(tot*2))*100);
-  return{s,c:s>=80?'g':s>=50?'a':'r'};
-}
-
-/* ───── SALES INTELLIGENCE ───── */
-const PITCHES = {
-  MISSING_DMARC:{
-    opener:'Right now, anyone in the world can send an email that looks like it came from your company — your customers, your suppliers, even your bank contacts.',
-    body:`That's not hypothetical. Without a DMARC record, your domain is an open invitation for phishing attacks that use <strong>your name and your brand</strong>. Your customers can't tell the difference. The damage to your reputation when they find out is far worse than the fix. We add DMARC, SPF, and monitoring in one session — most SMBs are sorted in under an hour.`,
-    tips:[
-      {l:'THE RISK',t:'Invoice fraud, credential phishing, and brand impersonation — all sent "from" your domain.'},
-      {l:'THE COST TO FIX',t:'A single DNS record. Setup takes less time than a coffee meeting.'},
-      {l:'THE COST TO IGNORE',t:'One customer tricked by a spoofed email can end a relationship permanently.'},
-    ],
-    cta:'Book a 20-min email security call →'
-  },
-  WEAK_DMARC:{
-    opener:`You've got a DMARC record set up — which puts you ahead of most businesses your size. But it's set to "monitoring only," which means it's a smoke alarm with no sprinklers.`,
-    body:`Spoofed emails from your domain are still getting through. You're watching it happen in reports, but nothing is being blocked. The one-line change from <strong>p=none to p=reject</strong> is what actually protects your customers. We handle the transition carefully so your legitimate email doesn't get caught in the crossfire.`,
-    tips:[
-      {l:'WHERE YOU ARE',t:'DMARC exists but enforcement is off — spoofing is unblocked.'},
-      {l:'WHERE YOU NEED TO BE',t:'p=reject with 100% coverage and active aggregate reporting.'},
-      {l:'WHAT WE DO',t:'Audit your email flows, tighten SPF, then graduate your policy safely.'},
-    ],
-    cta:'Let\'s harden your policy →'
-  },
-  MISSING_SPF:{
-    opener:`Any server on the internet can send email claiming to be from your domain — and spam filters have no way to know it's not you.`,
-    body:`Without an SPF record your domain's emails look suspicious even when they're legitimate. You're probably already hitting spam folders you don't know about. We set up SPF correctly — not the common mistakes that cause delivery failures — and your email reputation recovers fast.`,
-    tips:[
-      {l:'IMMEDIATE RISK',t:'Your real emails may be going to spam right now because your domain looks untrustworthy.'},
-      {l:'BRAND RISK',t:'Spammers abusing your domain get your domain blacklisted — affecting all your email.'},
-      {l:'THE FIX',t:'One TXT record. Done in minutes. Ongoing monitoring included.'},
-    ],
-    cta:'Fix deliverability now →'
-  },
-  SSL_FAIL:{
-    opener:`Your website isn't serving secure connections — and that's costing you traffic, trust, and possibly sales.`,
-    body:`Google demotes sites without HTTPS in search rankings. Browsers show a <strong>"Not Secure" warning</strong> to visitors. Any data customers submit — contact forms, quote requests, anything — is transmitted in plain text that anyone on the same network can read. SSL is the absolute baseline of web trust in ${new Date().getFullYear()}.`,
-    tips:[
-      {l:'SEO IMPACT',t:'Google confirmed HTTPS as a ranking signal. You may be invisible to potential customers searching right now.'},
-      {l:'TRUST IMPACT',t:'"Not Secure" warnings cause 85% of visitors to abandon a page immediately.'},
-      {l:'LIABILITY',t:'Transmitting customer data without encryption creates legal exposure under data protection law.'},
-    ],
-    cta:'Get a secure site quote →'
-  },
-  COMBINED:{
-    opener:`A quick look at your domain turned up several security gaps — the kind that most small businesses don't know about until something goes wrong.`,
-    body:`Missing or misconfigured email authentication means your brand can be impersonated. Weak SSL means your customers are warned away before they even see your offer. These aren't theoretical risks — they're actively hurting your deliverability, your search rankings, and your customer trust <strong>right now</strong>. We do a full remediation in one engagement. Most clients see measurable improvement within 48 hours.`,
-    tips:[
-      {l:'EMAIL SECURITY',t:'SPF + DMARC + DKIM configured and enforced properly.'},
-      {l:'WEB SECURITY',t:'SSL/TLS validated, HTTP redirect confirmed, headers hardened.'},
-      {l:'ONGOING',t:'Monthly monitoring report so you never go dark on your own domain again.'},
-    ],
-    cta:'Book a full security audit →'
-  },
-  CLEAN:{
-    opener:`Your domain configuration is solid — better than most businesses we scan.`,
-    body:`That actually opens a different conversation. Businesses that care about their email and web security are the clients that also understand the value of <strong>ongoing monitoring, threat alerting, and compliance reporting</strong>. You've built the foundation. Let's make sure it stays clean as your email infrastructure grows and providers change.`,
-    tips:[
-      {l:'MONITORING',t:'DMARC aggregate reports reviewed monthly — catch configuration drift before it becomes a problem.'},
-      {l:'ALERTING',t:'Real-time alerts if your SPF or DKIM selectors go dark or change unexpectedly.'},
-      {l:'GROWTH RISK',t:'Adding a new CRM or email tool often breaks SPF and DKIM. We catch it before your customers see a bounce.'},
-    ],
-    cta:'Discuss ongoing protection →'
-  }
-};
-
-function buildSalesPitch(results){
-  const issues=[];
-  const r=results;
-  const dmarcMissing=r.dmarc?.status==='fail'&&r.dmarc?.issues?.includes('MISSING');
-  const dmarcWeak=r.dmarc?.status==='warn';
-  const spfMissing=r.spf?.status==='fail';
-  const sslFail=r.ssl?.status==='fail';
-  if(dmarcMissing)issues.push('MISSING_DMARC');
-  if(dmarcWeak&&!dmarcMissing)issues.push('WEAK_DMARC');
-  if(spfMissing)issues.push('MISSING_SPF');
-  if(sslFail)issues.push('SSL_FAIL');
-
-  let pitch;
-  if(issues.length===0&&Object.values(results).every(r=>!r||r.status==='pass'||r.status==='skip')){
-    pitch=PITCHES.CLEAN;
-  } else if(issues.length>=2){
-    pitch=PITCHES.COMBINED;
-  } else if(issues[0]&&PITCHES[issues[0]]){
-    pitch=PITCHES[issues[0]];
-  } else {
-    pitch=PITCHES.COMBINED;
-  }
-
-  const tipsHtml=pitch.tips.map(t=>`<div class="stip"><div class="tlabel">${esc(t.l)}</div><div class="ttext">${esc(t.t)}</div></div>`).join('');
-
-  return `<div class="sp">
-    <div class="sh">
-      <div class="sico">⚡</div>
-      <div><div class="stitle">SALES INTELLIGENCE BRIEF</div><div class="ssub">GENERATED FROM AUDIT RESULTS — READY TO USE</div></div>
-    </div>
-    <div class="scont">
-      <div class="opener">${esc(pitch.opener)}</div>
-      <div class="body">${pitch.body}</div>
-      <div class="stips">${tipsHtml}</div>
-      <button type="button" class="cta" data-pitch-cta>${esc(pitch.cta)}</button>
-    </div>
-  </div>`;
-}
-
-/* ───── MAIN ───── */
-async function go(){
-  const raw=document.getElementById('di').value.trim();
-  const domain=raw.replace(/^https?:\/\//,'').replace(/\/.*$/,'').toLowerCase();
-  if(!domain)return;
-  const input=document.getElementById('di');
-  if(domain.length>253 || !/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/.test(domain)){input.setCustomValidity('Enter a public domain name, such as example.com.');input.reportValidity();return;}
-  input.setCustomValidity('');
-
-  const btn=document.getElementById('sb');
-  btn.disabled=true;btn.textContent='SCANNING…';
-
-  const rp=document.getElementById('rp');
-  rp.style.display='block';
-  document.getElementById('td').textContent=domain;
-  document.getElementById('tm').textContent=`SCAN INITIATED: ${new Date().toISOString()}`;
-  document.getElementById('log').innerHTML='';
-  document.getElementById('salesdiv').style.display='none';
-  document.getElementById('snum').textContent='—';
-  document.getElementById('snum').style.color='';
-  res={};prog(0);
-
-  log(`Initiating audit — target: ${domain}`,'b');
-  log('Transport: DNS-over-HTTPS (Cloudflare 1.1.1.1)','');
-
-  const checks=[
-    {id:'c-dmarc',k:'dmarc',title:'DMARC',icon:'🛡',fn:()=>chkDMARC(domain)},
-    {id:'c-spf',  k:'spf',  title:'SPF',  icon:'📧',fn:()=>chkSPF(domain)},
-    {id:'c-dkim', k:'dkim', title:'DKIM', icon:'🔑',fn:()=>chkDKIM(domain)},
-    {id:'c-ssl',  k:'ssl',  title:'SSL / TLS',icon:'🔒',fn:()=>chkSSL(domain)},
-    {id:'c-mx',   k:'mx',   title:'MX RECORDS',icon:'📬',fn:()=>chkMX(domain)},
-  ];
-
-  const grid=document.getElementById('grid');
-  grid.innerHTML='';
-  checks.forEach(c=>{
-    const s=mkSkel(c.id,c.title,c.icon);
-    grid.appendChild(s);
-  });
-
-  const enabled=checks.filter(c=>active.has(c.k));
-  let done=0;
-
-  for(const c of checks){
-    if(!active.has(c.k)){
-      const el=document.getElementById(c.id);
-      el.className='card skip';
-      el.innerHTML=`<div class="ch"><span class="cico">${c.icon}</span><span class="cname">${c.title}</span><span class="cbadge bs">SKIPPED</span></div>`;
-      res[c.k]={status:'skip'};
-      continue;
-    }
-    try{res[c.k]=await c.fn();render(c.id,c.title,c.icon,res[c.k])}
-    catch(e){
-      log(`Error in ${c.k}: ${e.message}`,'r');
-      res[c.k]={status:'fail',analysis:[{t:'bad',m:`Check failed: ${e.message}`}]};
-      render(c.id,c.title,c.icon,res[c.k]);
-    }
-    done++;prog(Math.round(done/enabled.length*100));
-  }
-
-  prog(100);
-  log('All checks complete','g');
-
-  const {s,c}=score(res);
-  const sn=document.getElementById('snum');
-  sn.textContent=typeof s==='number'?s+'/100':'—';
-  sn.style.color=c==='g'?'var(--green)':c==='a'?'var(--amber)':c==='r'?'var(--red)':'';
-  document.getElementById('tm').textContent=`COMPLETE: ${new Date().toISOString()} | SCORE: ${typeof s==='number'?s+'/100':'—'}`;
-
-  const sd=document.getElementById('salesdiv');
-  sd.innerHTML=buildSalesPitch(res);
-  sd.style.display='block';
-
-  btn.disabled=false;btn.textContent='SCAN';
-}
-
-document.getElementById('sb').addEventListener('click',go);
-document.querySelectorAll('button[data-k]').forEach(button=>button.addEventListener('click',()=>tog(button)));
-document.getElementById('salesdiv').addEventListener('click',event=>{if(event.target.closest('[data-pitch-cta]'))alert('Customize this CTA with your booking link or phone number.');});
-document.getElementById('di').addEventListener('input',event=>event.target.setCustomValidity(''));
-document.getElementById('di').addEventListener('keydown',e=>{if(e.key==='Enter')go()});
 </script>
 </body>
+
 </html>

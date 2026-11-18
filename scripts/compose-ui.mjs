@@ -1,0 +1,12 @@
+import {readFile, writeFile} from 'node:fs/promises';
+const root=new URL('../',import.meta.url);
+const read=path=>readFile(new URL(path,root),'utf8');
+let head=(await read('index.html')).split('<style>')[0];
+head=head.replace(/<meta name="theme-color"[^>]+>/,'<meta name="theme-color" content="#0b1b46">').replace(/<link href="https:\/\/fonts.googleapis.com\/css2[^>]+>/,'<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">');
+let body=await read('design-source/repair-bench.html');
+const icons={};
+for(const name of ['shield-check','magnifying-glass','file-text','warning','caret-down','envelope-simple','key','lock-key','hard-drives','check','copy','arrow-clockwise']) icons[name]='data:image/svg+xml;base64,'+Buffer.from(await read('design-source/'+name+'.svg')).toString('base64');
+body=body.replace(/\{\{([\w-]+)(?::(\w+))?\}\}/g,(_,name,color)=>`<img class="icon ${color||''}" src="${icons[name]}" width="24" height="24" alt="">`);
+const js='const ICONS='+JSON.stringify(icons)+';\n'+await read('design-source/repair-bench.js');
+await writeFile(new URL('index.html',root),head+'<style>\n'+await read('design-source/repair-bench.css')+'\n</style>\n</head>\n'+body.replace('</body>','<script>\n'+js+'\n</script>\n</body>')+'\n</html>\n');
+console.log('Composed Repair Bench HTML, styles, and application.');
