@@ -4,57 +4,29 @@ Live site: **https://dmarc-able.app**. Check public DMARC, SPF, DKIM and MX
 records and browser HTTPS reachability. The static homepage includes metadata,
 methodology, factual structured data and crawlable navigation.
 
-A domain security auditor for finding gaps in small business email and web configuration — and turning those gaps into sales conversations.
-
-Download `index.html`. Open it in any browser. Type a domain. That's it.
-
-No install. No account. No API key. No server. One file.
-
-The downloaded checker still runs locally from one HTML file. Production hosting
-uses a small Cloudflare routing Worker for canonical redirects and security headers;
-the Worker does not perform domain scans or receive scan results.
-
----
+Repair Bench is a workspace for self-taught users checking their own domain or helping someone else. It separates the finding, public evidence, and the next conversation.
 
 ## What it checks
 
-- **DMARC** — is it there, what's the policy, is it actually enforced
-- **SPF** — present, correct, not catastrophically misconfigured
-- **DKIM** — probes 15 common selectors to find active keys
-- **SSL / port 443** — is HTTPS actually working
-- **MX records** — can the domain receive email, how many exchangers, which provider
+- **DMARC:** the directly published record and policy; not inherited policy or every tag.
+- **SPF:** record presence, duplicate records, and permissive `all`; not the full lookup tree.
+- **DKIM:** public keys at 15 common selectors. An inconclusive result does not mean DKIM is absent.
+- **HTTPS:** browser reachability, not a certificate audit.
+- **MX:** published receiving records, not proof of delivery.
 
-## What it does with the results
+No checks run on load. **Example report** uses clearly labelled sample data without DNS or HTTPS requests. **Check domain** queries Cloudflare DNS from the browser and optionally contacts the target site over HTTPS. Failed lookups remain inconclusive, not missing records.
 
-Every scan ends with a ready-to-use sales pitch written to the specific problem found. Missing DMARC is a different conversation than weak SPF — the tool knows the difference and gives you the right angle.
+## Notes you can make your own
 
-## SSL report notes: what `!` means
+**My domain** turns findings into personal next steps. **Helping someone** creates a short email or call outline with an optional recipient. Every draft is editable. Edits survive switching audience or format until a new scan, example report, or reload; recipient changes do not overwrite edited text. **Use suggested wording** explicitly resets the current draft. Copy uses the browser clipboard, with a manual-selection fallback. Drafts are composed locally, with no AI service or API key.
 
-The **`!` beside the certificate-details line is an informational notice**, not an error or a vulnerability warning. For example:
+The checker runs from one HTML file. Production hosting uses a small Cloudflare routing Worker for canonical redirects and security headers; it does not perform scans or receive results.
 
-```text
-! Certificate details (expiry, chain, ciphers) require CLI: openssl s_client -connect example.com:443 -showcerts
-```
+## Editing the interface
 
-A passing SSL check means the browser HTTPS probe succeeded; the report marks port 443 as reachable and the TLS handshake as completed. The scanner does not retrieve or deeply inspect the certificate's expiration date, intermediate certificate chain, or supported cipher suites. This notice identifies that scan limitation and does not change the SSL result from PASS.
+Edit `design-source/repair-bench.html`, `.css`, and `.js`, then run `npm run compose` to regenerate the committed `index.html`. Run `npm test` and `npm run check` before release. Production builds consume the committed HTML and emit CSP hashes; restart a local server after rebuilding so headers match the new scripts.
 
-To inspect the connection manually, run this in a terminal with OpenSSL installed, replacing `example.com` with the scanned domain:
-
-```sh
-openssl s_client -connect example.com:443 -showcerts
-```
-
-For the domain `worldpostinc.com`, use:
-
-```sh
-openssl s_client -connect worldpostinc.com:443 -showcerts
-```
-
-OpenSSL shows the certificates sent by the server and the connection's negotiated TLS protocol and cipher. The `-showcerts` output is not a verified certificate chain, and one connection does not enumerate all supported ciphers. To display a certificate's validity dates explicitly, save its PEM block to `certificate.pem` and run `openssl x509 -in certificate.pem -noout -dates`; `notAfter` is the expiration date. See the [OpenSSL s_client documentation](https://docs.openssl.org/3.0/man1/openssl-s_client/).
-
-This meaning applies specifically to the certificate-details notice. Other `!` entries can flag configuration warnings; read their message and the card's status.
-
----
+Icons are from Phosphor Icons 2.1.1 (MIT); the original SVGs and license are in `design-source/`. No icon CDN or runtime dependency is needed. The local `qa/` screenshots are review artifacts and are excluded from the public build and Git.
 
 ## Download
 

@@ -41,3 +41,6 @@ out/
 # Electron builds
 release/
 build/
+
+# Local visual QA captures
+qa/
